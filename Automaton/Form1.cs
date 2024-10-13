@@ -82,10 +82,10 @@ namespace Automaton
 
             foreach (var transition in transitions)
             {                
-                // Verificar la cantidad de destinos para cada transición
+                // Verificar si hay más de un destino para la misma transición
                 if (transition.Value.Count != 1)
                 {
-                    // Si hay más de un destino, no es determinista
+                    // Si hay más de un destino, es no determinista
                     return true;
                 }
             }
@@ -97,27 +97,29 @@ namespace Automaton
             // Referencia a los estados del automata
             var states = (List<string>)dict["states"];
 
-            // Recorrer cada estado y contar la cantidad de transiciones con diferente simbolo
-            // Es decir, para cada estado debe hacer una catidad de transiciones igual a la cantidad de simbolos
+            // Recorrer cada estado y guardar los simbolos de transiciones
+            // 
+            
             foreach (var state in states)
             {
-                // Contador de transisiones con diferente simbolo
-                var countState = 0;
-                
+                // Conjunto para los símbolos vistos
+                var seenSymbols = new HashSet<string>(); 
+
                 // Recorrer las transiciones
                 foreach (var transition in transitions)
                 {
                     // Comparar si el estado origen de la transición es igual al estado
-                    if( transition.Key.state == state)
+                    if (transition.Key.state == state)
                     {
-                        // Si lo es sumamos 1 al contador
-                        countState += 1;
+                        // Agregar el símbolo al conjunto
+                        seenSymbols.Add(transition.Key.symbol);
                     }
                 }
-                // Comparamos que la cantidad de veces que aparece el estado con diferente simbolo de transición no sea igual a la cantidad de simbolos
-                if (countState != states.Count)
+
+                // Comparamos que la cantidad de símbolos únicos vistos sea igual a la cantidad de símbolos
+                if (seenSymbols.Count != symbols.Count)
                 {
-                    return true;
+                    return true; // Es no determinista
                 }
             }
             return false;
@@ -230,8 +232,8 @@ namespace Automaton
                 {"acceptanceStates", new List<string> { "b" }},
                 {"transitions", new Dictionary<(string state, string symbol), List<string>>
                     {
-                        { ("a", "0"), new List<string>{"b", "c" } },
-                        { ("c", "0"), new List<string>{"a", "b"} },
+                        { ("a", "0"), new List<string>{"b", "c"} },
+                        { ("c", "0"), new List<string>{"a"} },
                         { ("c", "1"), new List<string>{"b" } }
                     }
                 }
