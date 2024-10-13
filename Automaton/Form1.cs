@@ -63,6 +63,45 @@ namespace Automaton
 
         // Add initial state function
 
+        private void AddInitialState(Dictionary<string, object> dict, string state)
+        {
+            state = state.Trim();
+            //MessageBox.Show($"State: |{state}|");
+
+            //Referencia a los estados y el estado inicial
+            var dictStates = (List<string>)dict["states"];
+            var dictInitialState = (List<string>)dict["initialState"];
+
+            // Validar que el estado inicial se encuentre en los estados
+            if (dictStates.Contains(state))
+            {
+                // Validar que no haya un estado inicial ya definido
+                if (dictInitialState.Count() == 0)
+                {
+                    // Agregar estado inicial
+                    dictInitialState.Add(state);
+
+                    // Poner en primera posición el estado inical para facilitar la grafica
+                    MessageBox.Show($"Before State: {string.Join(",", dictStates)}");
+                    int index = dictStates.IndexOf(state);
+                    if (index != 0)
+                    {
+                        dictStates.RemoveAt(index);
+                        dictStates.Insert(0, state);
+                    }
+                    MessageBox.Show($"After State: {string.Join(",", dictStates)}");
+                }
+                else
+                {
+                    MessageBox.Show($"Ya hay definido un estado inicial: {dictInitialState[0]}");
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Estado {state} no existe!");
+            }
+        }
+
 
         // Add Acceptance States function
 
@@ -264,6 +303,12 @@ namespace Automaton
                 MessageBox.Show("El automata es Finito Determinista (DFA)");
             }
             GraphicAutomaton(automaton);
+        }
+
+        private void btnAddInitialState_Click(object sender, EventArgs e)
+        {
+            string initialState = txtInitialState.Text;
+            AddInitialState(automaton, initialState);
         }
     }
 }

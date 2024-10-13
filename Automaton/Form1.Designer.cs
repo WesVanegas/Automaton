@@ -235,13 +235,13 @@
             // 
             // btnAddInitialState
             // 
-            this.btnAddInitialState.Enabled = false;
             this.btnAddInitialState.Location = new System.Drawing.Point(294, 81);
             this.btnAddInitialState.Name = "btnAddInitialState";
             this.btnAddInitialState.Size = new System.Drawing.Size(75, 23);
             this.btnAddInitialState.TabIndex = 20;
             this.btnAddInitialState.Text = "Add E Inicial";
             this.btnAddInitialState.UseVisualStyleBackColor = true;
+            this.btnAddInitialState.Click += new System.EventHandler(this.btnAddInitialState_Click);
             // 
             // btnAcceptanceStates
             // 
