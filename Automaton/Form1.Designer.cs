@@ -245,13 +245,13 @@
             // 
             // btnAcceptanceStates
             // 
-            this.btnAcceptanceStates.Enabled = false;
             this.btnAcceptanceStates.Location = new System.Drawing.Point(294, 107);
             this.btnAcceptanceStates.Name = "btnAcceptanceStates";
             this.btnAcceptanceStates.Size = new System.Drawing.Size(75, 23);
             this.btnAcceptanceStates.TabIndex = 21;
             this.btnAcceptanceStates.Text = "Add E Final";
             this.btnAcceptanceStates.UseVisualStyleBackColor = true;
+            this.btnAcceptanceStates.Click += new System.EventHandler(this.btnAcceptanceStates_Click);
             // 
             // Form1
             // 

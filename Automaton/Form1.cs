@@ -104,7 +104,29 @@ namespace Automaton
 
 
         // Add Acceptance States function
+        private void AddAcceptanceStates(Dictionary<string, object> dict, string states)
+        {
+            string[] newAcceptanceStates = states.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
 
+            // Referencia a los estados de acceptación
+            var dictAcceptanceStates = (List<string>)dict["acceptanceStates"];
+            var dictStates = (List<string>)dict["states"];
+
+            foreach (var state in newAcceptanceStates)
+            {
+                // Validar que el estado exista y no se encuentre en AcceptanceStates
+                if (dictStates.Contains(state) & !dictAcceptanceStates.Contains(state))
+                {
+                    dictAcceptanceStates.Add(state);
+                    MessageBox.Show($"Se agregó estado de aceptación {state}");
+                }
+                else
+                {
+                    MessageBox.Show($"No se pudo agregar estado {state}\nNo existe como estado o ya se encuentra en los estados que aceptan.");
+                }
+            }
+
+        }
 
         // Add Transitions function
 
@@ -309,6 +331,12 @@ namespace Automaton
         {
             string initialState = txtInitialState.Text;
             AddInitialState(automaton, initialState);
+        }
+
+        private void btnAcceptanceStates_Click(object sender, EventArgs e)
+        {
+            string acceptanceStates = txtAcceptanceStates.Text;
+            AddAcceptanceStates(automaton, acceptanceStates);
         }
     }
 }
