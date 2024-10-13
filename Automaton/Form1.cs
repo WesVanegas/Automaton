@@ -130,6 +130,55 @@ namespace Automaton
 
         // Add Transitions function
 
+        private void AddTransitions(Dictionary<string, object> dict, string origin, string symbol, string destination)
+        {
+            // Quitar espacios de los extremos
+            origin = origin.Trim();
+            symbol = symbol.Trim();
+            destination = destination.Trim();
+
+            // Referencias a los estados y los símbolos
+            var dictStates = (List<string>)dict["states"];
+            var dictSymbols = (List<string>)dict["symbols"];
+
+            // Referencia a las transiciones {Key=(state, symbol): Value}
+            var dictTransitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
+
+            // Validar que los estados ingresados (origin, destination) y el símbolo (symbol) existan en el automata.
+            bool validation = dictSymbols.Contains(symbol) && dictStates.Contains(origin) && dictStates.Contains(destination);
+
+            if (validation)
+            {
+                // Revisar si ya existe la transición con el estado y simbolo ingresado
+                if (dictTransitions.ContainsKey((origin, symbol)))
+                {
+                    // Verificar que para los valores ingresados no existe el destino
+                    if (!dictTransitions[(origin, symbol)].Contains(destination))
+                    {
+                        // Agregar nuevo destino
+                        dictTransitions[(origin, symbol)].Add(destination);
+                        MessageBox.Show($"Transición ({origin},{symbol})={destination} Agregada!");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Transición ({origin},{symbol})={destination} Ya existe!\n No se puede agregar nuevamente.");
+                    }
+
+                }
+                else
+                {
+                    // Si no existe la transición con el estado y simbolo ingresado, se agrega al automata
+                    dictTransitions.Add((origin, symbol), new List<string> { destination });
+                    MessageBox.Show($"Transición ({origin},{symbol})={destination} Agregada!");
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Transición ({origin},{symbol})={destination} no agregada!\nRevisar valores ingresados");
+            }
+
+        }
+
 
         // Validate type of automaton function
         // Nondeterministic finite automaton (NFA)
@@ -337,6 +386,15 @@ namespace Automaton
         {
             string acceptanceStates = txtAcceptanceStates.Text;
             AddAcceptanceStates(automaton, acceptanceStates);
+        }
+
+        private void btnAddTransition_Click(object sender, EventArgs e)
+        {
+            string origin = txtOrigin.Text;
+            string symbol = txtSymbol.Text;
+            string destination = txtDestination.Text;
+
+            AddTransitions(automaton, origin, symbol, destination);
         }
     }
 }

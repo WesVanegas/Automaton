@@ -177,13 +177,13 @@
             // 
             // btnAddTransition
             // 
-            this.btnAddTransition.Enabled = false;
             this.btnAddTransition.Location = new System.Drawing.Point(550, 121);
             this.btnAddTransition.Name = "btnAddTransition";
             this.btnAddTransition.Size = new System.Drawing.Size(120, 23);
             this.btnAddTransition.TabIndex = 14;
             this.btnAddTransition.Text = "Agregar transición";
             this.btnAddTransition.UseVisualStyleBackColor = true;
+            this.btnAddTransition.Click += new System.EventHandler(this.btnAddTransition_Click);
             // 
             // btnGraph
             // 
