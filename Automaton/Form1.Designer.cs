@@ -122,7 +122,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(565, 32);
+            this.label5.Location = new System.Drawing.Point(169, 153);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 13);
             this.label5.TabIndex = 6;
@@ -131,7 +131,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(480, 60);
+            this.label6.Location = new System.Drawing.Point(84, 181);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 7;
@@ -139,14 +139,14 @@
             // 
             // txtOrigin
             // 
-            this.txtOrigin.Location = new System.Drawing.Point(466, 86);
+            this.txtOrigin.Location = new System.Drawing.Point(70, 207);
             this.txtOrigin.Name = "txtOrigin";
             this.txtOrigin.Size = new System.Drawing.Size(67, 20);
             this.txtOrigin.TabIndex = 8;
             // 
             // txtSymbol
             // 
-            this.txtSymbol.Location = new System.Drawing.Point(568, 86);
+            this.txtSymbol.Location = new System.Drawing.Point(172, 207);
             this.txtSymbol.Name = "txtSymbol";
             this.txtSymbol.Size = new System.Drawing.Size(67, 20);
             this.txtSymbol.TabIndex = 10;
@@ -154,7 +154,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(577, 60);
+            this.label7.Location = new System.Drawing.Point(181, 181);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 9;
@@ -162,7 +162,7 @@
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(675, 86);
+            this.txtDestination.Location = new System.Drawing.Point(279, 207);
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(67, 20);
             this.txtDestination.TabIndex = 12;
@@ -170,7 +170,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(689, 60);
+            this.label8.Location = new System.Drawing.Point(293, 181);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(43, 13);
             this.label8.TabIndex = 11;
@@ -178,7 +178,7 @@
             // 
             // btnAddTransition
             // 
-            this.btnAddTransition.Location = new System.Drawing.Point(550, 121);
+            this.btnAddTransition.Location = new System.Drawing.Point(154, 242);
             this.btnAddTransition.Name = "btnAddTransition";
             this.btnAddTransition.Size = new System.Drawing.Size(120, 23);
             this.btnAddTransition.TabIndex = 14;
@@ -188,7 +188,7 @@
             // 
             // btnGraph
             // 
-            this.btnGraph.Location = new System.Drawing.Point(72, 282);
+            this.btnGraph.Location = new System.Drawing.Point(171, 406);
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(75, 23);
             this.btnGraph.TabIndex = 15;
@@ -198,7 +198,7 @@
             // 
             // btnClean
             // 
-            this.btnClean.Location = new System.Drawing.Point(72, 367);
+            this.btnClean.Location = new System.Drawing.Point(171, 491);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(75, 23);
             this.btnClean.TabIndex = 16;
@@ -208,9 +208,13 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(209, 166);
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(430, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(533, 313);
+            this.pictureBox1.Size = new System.Drawing.Size(307, 537);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             // 
@@ -256,7 +260,7 @@
             // 
             // btnViewAutomaton
             // 
-            this.btnViewAutomaton.Location = new System.Drawing.Point(72, 199);
+            this.btnViewAutomaton.Location = new System.Drawing.Point(171, 323);
             this.btnViewAutomaton.Name = "btnViewAutomaton";
             this.btnViewAutomaton.Size = new System.Drawing.Size(75, 23);
             this.btnViewAutomaton.TabIndex = 22;
@@ -268,7 +272,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 504);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.btnViewAutomaton);
             this.Controls.Add(this.btnAcceptanceStates);
             this.Controls.Add(this.btnAddInitialState);
@@ -294,6 +299,7 @@
             this.Controls.Add(this.txtSymbols);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Automaton";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

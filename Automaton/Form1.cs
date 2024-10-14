@@ -273,7 +273,39 @@ namespace Automaton
         }
 
         // Clean Dict function
-        
+        private void CleanAutomaton(Dictionary<string, object> dict)
+        {
+            pictureBox1.Image.Dispose();
+            pictureBox1.Image = null;
+            pictureBox1.Update();
+            //Referencias a cada llave del diccionarion
+            var dictSymbols = (List<string>)dict["symbols"];
+            var dictStates = (List<string>)dict["states"];
+            var dictInitialState = (List<string>)dict["initialState"];
+            var dictAcceptanceStates = (List<string>)dict["acceptanceStates"];
+            var dictTransitions = (Dictionary<(string, string), List<string>>)dict["transitions"];
+
+            if (File.Exists("automato.dot"))
+            {
+                File.Delete("automato.dot");
+            }
+            
+            
+            if (File.Exists("automato.png"))
+            {
+                File.Delete("automato.png");
+            }
+            
+            
+            
+            // Borrar el contenido
+            dictSymbols.Clear();
+            dictStates.Clear();
+            dictInitialState.Clear();
+            dictAcceptanceStates.Clear();
+            dictTransitions.Clear();
+        }
+
 
 
         // Create graphic from Dot file
@@ -313,7 +345,7 @@ namespace Automaton
                 }
                 writer.WriteLine("}");
             }
-            MessageBox.Show("Archivo Dot generado");
+            //MessageBox.Show("Archivo Dot generado");
 
             // Graficar con Graphviz usando el archivo Dot como referencia
 
@@ -432,7 +464,15 @@ namespace Automaton
 
         private void btnClean_Click(object sender, EventArgs e)
         {
-
+            //pictureBox1.Image = null;
+            txtSymbols.Clear();
+            txtStates.Clear();
+            txtInitialState.Clear();
+            txtAcceptanceStates.Clear();
+            txtOrigin.Clear();
+            txtSymbol.Clear();
+            txtDestination.Clear();
+            CleanAutomaton(automaton);
         }
 
         private void btnViewAutomaton_Click(object sender, EventArgs e)
