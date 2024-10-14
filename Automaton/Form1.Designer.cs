@@ -51,6 +51,7 @@
             this.btnAddStates = new System.Windows.Forms.Button();
             this.btnAddInitialState = new System.Windows.Forms.Button();
             this.btnAcceptanceStates = new System.Windows.Forms.Button();
+            this.btnViewAutomaton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -187,7 +188,7 @@
             // 
             // btnGraph
             // 
-            this.btnGraph.Location = new System.Drawing.Point(72, 222);
+            this.btnGraph.Location = new System.Drawing.Point(72, 282);
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(75, 23);
             this.btnGraph.TabIndex = 15;
@@ -197,13 +198,13 @@
             // 
             // btnClean
             // 
-            this.btnClean.Enabled = false;
-            this.btnClean.Location = new System.Drawing.Point(72, 311);
+            this.btnClean.Location = new System.Drawing.Point(72, 367);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(75, 23);
             this.btnClean.TabIndex = 16;
             this.btnClean.Text = "Limpiar";
             this.btnClean.UseVisualStyleBackColor = true;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
             // pictureBox1
             // 
@@ -253,11 +254,22 @@
             this.btnAcceptanceStates.UseVisualStyleBackColor = true;
             this.btnAcceptanceStates.Click += new System.EventHandler(this.btnAcceptanceStates_Click);
             // 
+            // btnViewAutomaton
+            // 
+            this.btnViewAutomaton.Location = new System.Drawing.Point(72, 199);
+            this.btnViewAutomaton.Name = "btnViewAutomaton";
+            this.btnViewAutomaton.Size = new System.Drawing.Size(75, 23);
+            this.btnViewAutomaton.TabIndex = 22;
+            this.btnViewAutomaton.Text = "Ver automata";
+            this.btnViewAutomaton.UseVisualStyleBackColor = true;
+            this.btnViewAutomaton.Click += new System.EventHandler(this.btnViewAutomaton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 504);
+            this.Controls.Add(this.btnViewAutomaton);
             this.Controls.Add(this.btnAcceptanceStates);
             this.Controls.Add(this.btnAddInitialState);
             this.Controls.Add(this.btnAddStates);
@@ -314,6 +326,7 @@
         private System.Windows.Forms.Button btnAddStates;
         private System.Windows.Forms.Button btnAddInitialState;
         private System.Windows.Forms.Button btnAcceptanceStates;
+        private System.Windows.Forms.Button btnViewAutomaton;
     }
 }
 

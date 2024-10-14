@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Markup;
 
 namespace Automaton
 {
@@ -239,8 +240,40 @@ namespace Automaton
         // Convert NFA to DFA function
 
 
-        // Clean Dict function
 
+        // Show automaton data
+        private void ShowAutomaton(Dictionary<string, object> dict)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var item in dict)
+            {
+                sb.AppendLine($"{item.Key}: {ValueConverter(item.Value)}");
+            }
+
+            MessageBox.Show(sb.ToString(), "Contenido del automata");
+        }
+
+        private static string ValueConverter(object value)
+        {
+            if (value is List<string> list)
+            {
+                return string.Join(", ", list);
+            }
+            else if (value is Dictionary<(string, string), List<string>> transitions)
+            {
+                var sb = new StringBuilder();
+                foreach (var transition in transitions)
+                {
+                    sb.AppendLine($"({transition.Key.Item1}, {transition.Key.Item2}): {string.Join(", ", transition.Value)}");
+                }
+                return sb.ToString();
+            }
+            return Convert.ToString(value);
+        }
+
+        // Clean Dict function
+        
 
 
         // Create graphic from Dot file
@@ -292,7 +325,7 @@ namespace Automaton
             ProcessStartInfo processStartInfo = new ProcessStartInfo
             {
                 //Si se tiene instalado graphviz, la línea FileName es la siguiente
-                //FileName = "dot",
+                //FileName = "dot", 
                 FileName = graphvizPath,
                 Arguments = "-Tpng automato.dot -o automato.png",
                 RedirectStandardOutput = true,
@@ -395,6 +428,16 @@ namespace Automaton
             string destination = txtDestination.Text;
 
             AddTransitions(automaton, origin, symbol, destination);
+        }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnViewAutomaton_Click(object sender, EventArgs e)
+        {
+            ShowAutomaton(automaton);
         }
     }
 }
