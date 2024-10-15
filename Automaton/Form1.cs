@@ -29,7 +29,7 @@ namespace Automaton
                 // Verificar que el o los simbolos ingresados no existan
                 if (dictSymbols.Contains(symbol))
                 {
-                    MessageBox.Show($"Simbolo {symbol} ya existe!");
+                    MessageBox.Show($"The symbol '{symbol}' already exists!");
                 }
                 else
                 {
@@ -51,7 +51,7 @@ namespace Automaton
                 // Verificar que el o los estados ingresadso no existan
                 if (dictStates.Contains(state))
                 {
-                    MessageBox.Show($"Simbolo {state} ya existe!");
+                    MessageBox.Show($"The state '{state}' already exists!");
                 }
                 else
                 {
@@ -94,12 +94,12 @@ namespace Automaton
                 }
                 else
                 {
-                    MessageBox.Show($"Ya hay definido un estado inicial: {dictInitialState[0]}");
+                    MessageBox.Show($"There is already a initial state: {dictInitialState[0]}");
                 }
             }
             else
             {
-                MessageBox.Show($"Estado {state} no existe!");
+                MessageBox.Show($"State '{state}' does not exist!");
             }
         }
 
@@ -275,9 +275,12 @@ namespace Automaton
         // Clean Dict function
         private void CleanAutomaton(Dictionary<string, object> dict)
         {
-            pictureBox1.Image.Dispose();
-            pictureBox1.Image = null;
-            pictureBox1.Update();
+            if(pictureBox1.Image != null)
+            {
+                pictureBox1.Image.Dispose();
+                pictureBox1.Image = null;
+                pictureBox1.Update();
+            }
             //Referencias a cada llave del diccionarion
             var dictSymbols = (List<string>)dict["symbols"];
             var dictStates = (List<string>)dict["states"];
@@ -385,7 +388,7 @@ namespace Automaton
                 }
                 else
                 {
-                    MessageBox.Show("Error, no se encontró imagen");
+                    MessageBox.Show("Error, the image was not found.");
                 }
             }
 
@@ -432,11 +435,11 @@ namespace Automaton
         {
             if (isNFA(automaton))
             {
-                MessageBox.Show("El automata es Finito NO Determinista (NFA)");
+                MessageBox.Show("The automaton is Finite Non-Deterministic (NFA)");
             }
             else
             {
-                MessageBox.Show("El automata es Finito Determinista (DFA)");
+                MessageBox.Show("The automaton is Deterministic Finite (DFA)");
             }
             GraphicAutomaton(automaton);
         }

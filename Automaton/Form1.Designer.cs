@@ -58,15 +58,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 34);
+            this.label1.Location = new System.Drawing.Point(48, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Símbolos entrada";
+            this.label1.Text = "Input symbol";
             // 
             // txtSymbols
             // 
             this.txtSymbols.Location = new System.Drawing.Point(179, 31);
+            this.txtSymbols.MaxLength = 1;
             this.txtSymbols.Name = "txtSymbols";
             this.txtSymbols.Size = new System.Drawing.Size(100, 20);
             this.txtSymbols.TabIndex = 1;
@@ -74,6 +75,7 @@
             // txtAcceptanceStates
             // 
             this.txtAcceptanceStates.Location = new System.Drawing.Point(179, 109);
+            this.txtAcceptanceStates.MaxLength = 1;
             this.txtAcceptanceStates.Name = "txtAcceptanceStates";
             this.txtAcceptanceStates.Size = new System.Drawing.Size(100, 20);
             this.txtAcceptanceStates.TabIndex = 3;
@@ -81,24 +83,25 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(69, 112);
+            this.label2.Location = new System.Drawing.Point(48, 117);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 13);
+            this.label2.Size = new System.Drawing.Size(109, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Estados aceptación";
+            this.label2.Text = "States of acceptance";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(69, 60);
+            this.label3.Location = new System.Drawing.Point(48, 64);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Estados";
+            this.label3.Text = "States";
             // 
             // txtStates
             // 
             this.txtStates.Location = new System.Drawing.Point(179, 57);
+            this.txtStates.MaxLength = 1;
             this.txtStates.Name = "txtStates";
             this.txtStates.Size = new System.Drawing.Size(100, 20);
             this.txtStates.TabIndex = 3;
@@ -106,6 +109,7 @@
             // txtInitialState
             // 
             this.txtInitialState.Location = new System.Drawing.Point(179, 83);
+            this.txtInitialState.MaxLength = 1;
             this.txtInitialState.Name = "txtInitialState";
             this.txtInitialState.Size = new System.Drawing.Size(100, 20);
             this.txtInitialState.TabIndex = 5;
@@ -113,40 +117,42 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(69, 86);
+            this.label4.Location = new System.Drawing.Point(48, 91);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.Size = new System.Drawing.Size(62, 13);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Estado inicial";
+            this.label4.Text = "Inicial State";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(169, 153);
+            this.label5.Location = new System.Drawing.Point(176, 199);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 13);
+            this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Transiciones";
+            this.label5.Text = "Transitions";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(84, 181);
+            this.label6.Location = new System.Drawing.Point(48, 229);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 13);
+            this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 7;
-            this.label6.Text = "Origen";
+            this.label6.Text = "Origin";
             // 
             // txtOrigin
             // 
-            this.txtOrigin.Location = new System.Drawing.Point(70, 207);
+            this.txtOrigin.Location = new System.Drawing.Point(51, 257);
+            this.txtOrigin.MaxLength = 1;
             this.txtOrigin.Name = "txtOrigin";
             this.txtOrigin.Size = new System.Drawing.Size(67, 20);
             this.txtOrigin.TabIndex = 8;
             // 
             // txtSymbol
             // 
-            this.txtSymbol.Location = new System.Drawing.Point(172, 207);
+            this.txtSymbol.Location = new System.Drawing.Point(179, 257);
+            this.txtSymbol.MaxLength = 1;
             this.txtSymbol.Name = "txtSymbol";
             this.txtSymbol.Size = new System.Drawing.Size(67, 20);
             this.txtSymbol.TabIndex = 10;
@@ -154,15 +160,16 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(181, 181);
+            this.label7.Location = new System.Drawing.Point(176, 229);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 13);
+            this.label7.Size = new System.Drawing.Size(41, 13);
             this.label7.TabIndex = 9;
-            this.label7.Text = "Símbolo";
+            this.label7.Text = "Symbol";
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(279, 207);
+            this.txtDestination.Location = new System.Drawing.Point(302, 257);
+            this.txtDestination.MaxLength = 1;
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(67, 20);
             this.txtDestination.TabIndex = 12;
@@ -170,25 +177,25 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(293, 181);
+            this.label8.Location = new System.Drawing.Point(299, 229);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(43, 13);
+            this.label8.Size = new System.Drawing.Size(60, 13);
             this.label8.TabIndex = 11;
-            this.label8.Text = "Destino";
+            this.label8.Text = "Destination";
             // 
             // btnAddTransition
             // 
-            this.btnAddTransition.Location = new System.Drawing.Point(154, 242);
+            this.btnAddTransition.Location = new System.Drawing.Point(159, 326);
             this.btnAddTransition.Name = "btnAddTransition";
             this.btnAddTransition.Size = new System.Drawing.Size(120, 23);
             this.btnAddTransition.TabIndex = 14;
-            this.btnAddTransition.Text = "Agregar transición";
+            this.btnAddTransition.Text = "Add Transition";
             this.btnAddTransition.UseVisualStyleBackColor = true;
             this.btnAddTransition.Click += new System.EventHandler(this.btnAddTransition_Click);
             // 
             // btnGraph
             // 
-            this.btnGraph.Location = new System.Drawing.Point(171, 406);
+            this.btnGraph.Location = new System.Drawing.Point(179, 401);
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(75, 23);
             this.btnGraph.TabIndex = 15;
@@ -198,7 +205,7 @@
             // 
             // btnClean
             // 
-            this.btnClean.Location = new System.Drawing.Point(171, 491);
+            this.btnClean.Location = new System.Drawing.Point(296, 401);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(75, 23);
             this.btnClean.TabIndex = 16;
@@ -224,7 +231,7 @@
             this.btnAddsymbols.Name = "btnAddsymbols";
             this.btnAddsymbols.Size = new System.Drawing.Size(75, 23);
             this.btnAddsymbols.TabIndex = 18;
-            this.btnAddsymbols.Text = "Add simbolo";
+            this.btnAddsymbols.Text = "Add ";
             this.btnAddsymbols.UseVisualStyleBackColor = true;
             this.btnAddsymbols.Click += new System.EventHandler(this.btnAddsymbols_Click);
             // 
@@ -234,7 +241,7 @@
             this.btnAddStates.Name = "btnAddStates";
             this.btnAddStates.Size = new System.Drawing.Size(75, 23);
             this.btnAddStates.TabIndex = 19;
-            this.btnAddStates.Text = "Add Estado";
+            this.btnAddStates.Text = "Add ";
             this.btnAddStates.UseVisualStyleBackColor = true;
             this.btnAddStates.Click += new System.EventHandler(this.btnAddStates_Click);
             // 
@@ -244,7 +251,7 @@
             this.btnAddInitialState.Name = "btnAddInitialState";
             this.btnAddInitialState.Size = new System.Drawing.Size(75, 23);
             this.btnAddInitialState.TabIndex = 20;
-            this.btnAddInitialState.Text = "Add E Inicial";
+            this.btnAddInitialState.Text = "Add";
             this.btnAddInitialState.UseVisualStyleBackColor = true;
             this.btnAddInitialState.Click += new System.EventHandler(this.btnAddInitialState_Click);
             // 
@@ -254,13 +261,13 @@
             this.btnAcceptanceStates.Name = "btnAcceptanceStates";
             this.btnAcceptanceStates.Size = new System.Drawing.Size(75, 23);
             this.btnAcceptanceStates.TabIndex = 21;
-            this.btnAcceptanceStates.Text = "Add E Final";
+            this.btnAcceptanceStates.Text = "Add";
             this.btnAcceptanceStates.UseVisualStyleBackColor = true;
             this.btnAcceptanceStates.Click += new System.EventHandler(this.btnAcceptanceStates_Click);
             // 
             // btnViewAutomaton
             // 
-            this.btnViewAutomaton.Location = new System.Drawing.Point(171, 323);
+            this.btnViewAutomaton.Location = new System.Drawing.Point(56, 401);
             this.btnViewAutomaton.Name = "btnViewAutomaton";
             this.btnViewAutomaton.Size = new System.Drawing.Size(75, 23);
             this.btnViewAutomaton.TabIndex = 22;
