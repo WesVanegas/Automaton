@@ -52,6 +52,8 @@
             this.btnAddInitialState = new System.Windows.Forms.Button();
             this.btnAcceptanceStates = new System.Windows.Forms.Button();
             this.btnViewAutomaton = new System.Windows.Forms.Button();
+            this.txtLog = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,7 +124,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(169, 153);
+            this.label5.Location = new System.Drawing.Point(184, 151);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 13);
             this.label5.TabIndex = 6;
@@ -131,7 +133,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(84, 181);
+            this.label6.Location = new System.Drawing.Point(99, 179);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 7;
@@ -139,14 +141,14 @@
             // 
             // txtOrigin
             // 
-            this.txtOrigin.Location = new System.Drawing.Point(70, 207);
+            this.txtOrigin.Location = new System.Drawing.Point(85, 205);
             this.txtOrigin.Name = "txtOrigin";
             this.txtOrigin.Size = new System.Drawing.Size(67, 20);
             this.txtOrigin.TabIndex = 8;
             // 
             // txtSymbol
             // 
-            this.txtSymbol.Location = new System.Drawing.Point(172, 207);
+            this.txtSymbol.Location = new System.Drawing.Point(187, 205);
             this.txtSymbol.Name = "txtSymbol";
             this.txtSymbol.Size = new System.Drawing.Size(67, 20);
             this.txtSymbol.TabIndex = 10;
@@ -154,7 +156,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(181, 181);
+            this.label7.Location = new System.Drawing.Point(196, 179);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 9;
@@ -162,7 +164,7 @@
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(279, 207);
+            this.txtDestination.Location = new System.Drawing.Point(294, 205);
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(67, 20);
             this.txtDestination.TabIndex = 12;
@@ -170,7 +172,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(293, 181);
+            this.label8.Location = new System.Drawing.Point(308, 179);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(43, 13);
             this.label8.TabIndex = 11;
@@ -178,7 +180,7 @@
             // 
             // btnAddTransition
             // 
-            this.btnAddTransition.Location = new System.Drawing.Point(154, 242);
+            this.btnAddTransition.Location = new System.Drawing.Point(159, 241);
             this.btnAddTransition.Name = "btnAddTransition";
             this.btnAddTransition.Size = new System.Drawing.Size(120, 23);
             this.btnAddTransition.TabIndex = 14;
@@ -188,7 +190,7 @@
             // 
             // btnGraph
             // 
-            this.btnGraph.Location = new System.Drawing.Point(171, 406);
+            this.btnGraph.Location = new System.Drawing.Point(182, 321);
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(75, 23);
             this.btnGraph.TabIndex = 15;
@@ -198,7 +200,7 @@
             // 
             // btnClean
             // 
-            this.btnClean.Location = new System.Drawing.Point(171, 491);
+            this.btnClean.Location = new System.Drawing.Point(305, 321);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(75, 23);
             this.btnClean.TabIndex = 16;
@@ -260,7 +262,7 @@
             // 
             // btnViewAutomaton
             // 
-            this.btnViewAutomaton.Location = new System.Drawing.Point(171, 323);
+            this.btnViewAutomaton.Location = new System.Drawing.Point(58, 321);
             this.btnViewAutomaton.Name = "btnViewAutomaton";
             this.btnViewAutomaton.Size = new System.Drawing.Size(75, 23);
             this.btnViewAutomaton.TabIndex = 22;
@@ -268,12 +270,34 @@
             this.btnViewAutomaton.UseVisualStyleBackColor = true;
             this.btnViewAutomaton.Click += new System.EventHandler(this.btnViewAutomaton_Click);
             // 
+            // txtLog
+            // 
+            this.txtLog.BackColor = System.Drawing.SystemColors.Window;
+            this.txtLog.Location = new System.Drawing.Point(58, 398);
+            this.txtLog.Multiline = true;
+            this.txtLog.Name = "txtLog";
+            this.txtLog.ReadOnly = true;
+            this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtLog.Size = new System.Drawing.Size(322, 120);
+            this.txtLog.TabIndex = 23;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(171, 373);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(102, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Registro de eventos";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtLog);
             this.Controls.Add(this.btnViewAutomaton);
             this.Controls.Add(this.btnAcceptanceStates);
             this.Controls.Add(this.btnAddInitialState);
@@ -333,6 +357,8 @@
         private System.Windows.Forms.Button btnAddInitialState;
         private System.Windows.Forms.Button btnAcceptanceStates;
         private System.Windows.Forms.Button btnViewAutomaton;
+        private System.Windows.Forms.TextBox txtLog;
+        private System.Windows.Forms.Label label9;
     }
 }
 
