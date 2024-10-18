@@ -364,6 +364,8 @@ namespace Automaton
             using (StreamWriter writer = new StreamWriter("automato.dot"))
             {
                 writer.WriteLine("digraph G {");
+                // La siguiente línea es para que el diagrama sea horizontal
+		        //writer.WriteLine("rankdir=LR;");
                 if (initialState.Count == 1)
                 {
                     writer.WriteLine(" Inicio [shape=none];");
@@ -413,7 +415,8 @@ namespace Automaton
             // Graficar con Graphviz usando el archivo Dot como referencia
 
             // variable que contiene la ruta a dot.exe en la carpte Graphviz
-            string graphvizPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Graphviz", "bin", "dot.exe");
+            //string graphvizPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Graphviz", "bin", "dot.exe");
+            string graphvizPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Graphviz", "bin", "dot.exe");
 
             //MessageBox.Show($"Ruta graphviz: {graphvizPath}");
 

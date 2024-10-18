@@ -78,6 +78,125 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+	  <None Include="Graphviz\bin\brotlicommon.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\brotlidec.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\bz2.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\cairo-2.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\cdt.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\cgraph.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\config6">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\dot.exe">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\ffi-8.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\fontconfig-1.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\freetype.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\fribidi-0.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\gio-2.0-0.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\glib-2.0-0.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\gmodule-2.0-0.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\gobject-2.0-0.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\gvc.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\gvplugin_dot_layout.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\gvplugin_gd.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\gvplugin_gdiplus.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\gvplugin_pango.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\harfbuzz.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\iconv-2.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\intl-8.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\libexpat.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\libpng16.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\pango-1.0-0.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\pangocairo-1.0-0.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\pangoft2-1.0-0.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\pangowin32-1.0-0.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\pathplan.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\pcre2-8.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\pixman-1-0.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+
+	  <None Include="Graphviz\bin\xdot.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="Graphviz\bin\zlib1.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
