@@ -19,12 +19,13 @@ namespace Automaton
         private void AddSymbols(Dictionary<string, object> dict, string symbols)
         {
             // Quitar espacios y divisiones si es mas de un caracter ingresado
-            string[] newSymbols = symbols.Split(new char[] { ' ', ',', '.', '-'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] newSymbols = symbols.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
 
             //Referencia a la lista de simbolos en el diccionario
             var dictSymbols = (List<string>)dict["symbols"];
 
-            foreach (string symbol in newSymbols) {
+            foreach (string symbol in newSymbols)
+            {
 
                 // Verificar que el o los simbolos ingresados no existan
                 if (dictSymbols.Contains(symbol))
@@ -46,7 +47,7 @@ namespace Automaton
             string[] newStates = states.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
             //Referencia a la lista de simbolos en el diccionario
             var dictStates = (List<string>)dict["states"];
-            foreach (string state in newStates) 
+            foreach (string state in newStates)
             {
                 // Verificar que el o los estados ingresadso no existan
                 if (dictStates.Contains(state))
@@ -192,7 +193,7 @@ namespace Automaton
 
 
             foreach (var transition in transitions)
-            {                
+            {
                 // Verificar si hay más de un destino para la misma transición
                 if (transition.Value.Count != 1)
                 {
@@ -201,8 +202,8 @@ namespace Automaton
                 }
             }
             // Si no hay transiciones duplicadas, es DFA
-            
-            
+
+
             // Referencia a los simbolos del automata
             var symbols = (List<string>)dict["symbols"];
             // Referencia a los estados del automata
@@ -210,11 +211,11 @@ namespace Automaton
 
             // Recorrer cada estado y guardar los simbolos de transiciones
             // 
-            
+
             foreach (var state in states)
             {
                 // Conjunto para los símbolos vistos
-                var seenSymbols = new HashSet<string>(); 
+                var seenSymbols = new HashSet<string>();
 
                 // Recorrer las transiciones
                 foreach (var transition in transitions)
@@ -275,7 +276,7 @@ namespace Automaton
         // Clean Dict function
         private void CleanAutomaton(Dictionary<string, object> dict)
         {
-            if(pictureBox1.Image != null)
+            if (pictureBox1.Image != null)
             {
                 pictureBox1.Image.Dispose();
                 pictureBox1.Image = null;
@@ -292,15 +293,15 @@ namespace Automaton
             {
                 File.Delete("automato.dot");
             }
-            
-            
+
+
             if (File.Exists("automato.png"))
             {
                 File.Delete("automato.png");
             }
-            
-            
-            
+
+
+
             // Borrar el contenido
             dictSymbols.Clear();
             dictStates.Clear();
@@ -315,7 +316,7 @@ namespace Automaton
         private void GraphicAutomaton(Dictionary<string, object> dict)
         {
             // Crear archivo Dot
-            
+
             // Referencia a los estados de aceptación
             var acceptanceStatesList = (List<string>)dict["acceptanceStates"];
 
@@ -332,7 +333,7 @@ namespace Automaton
 
                 foreach (var item in (List<string>)dict["states"])
                 {
-                    string shape = acceptanceStatesList.Contains(item) ? "doublecircle": "circle";
+                    string shape = acceptanceStatesList.Contains(item) ? "doublecircle" : "circle";
 
                     writer.WriteLine($" {item} [shape={shape}];");
                 }
@@ -343,7 +344,7 @@ namespace Automaton
                 {
                     foreach (var item in transition.Value)
                     {
-                        writer.WriteLine($" {transition.Key.state} -> {item} [label = \"{transition.Key.symbol}\"];");                    
+                        writer.WriteLine($" {transition.Key.state} -> {item} [label = \"{transition.Key.symbol}\"];");
                     }
                 }
                 writer.WriteLine("}");
@@ -405,14 +406,17 @@ namespace Automaton
             automaton = new Dictionary<string, object>
             {
                 {"symbols", new List<string> { "1", "0" }},
-                {"states", new List<string> { "a", "b", "c" }},
+                {"states", new List<string> { "a", "b", "c", "d", "e" }},
                 {"initialState", new List<string> { "a" } },
-                {"acceptanceStates", new List<string> { "b" }},
+                {"acceptanceStates", new List<string> { "e" }},
                 {"transitions", new Dictionary<(string state, string symbol), List<string>>
                     {
-                        { ("a", "0"), new List<string>{"b", "c"} },
-                        { ("c", "0"), new List<string>{"a"} },
-                        { ("c", "1"), new List<string>{"b" } }
+                        { ("a", "0"), new List<string>{"b"} },
+                        { ("b", "0"), new List<string>{"c"} },
+                        { ("c", "0"), new List<string>{"c"} },
+                        { ("c", "1"), new List<string>{"c", "d" } },
+                        { ("d", "1"), new List<string>{"e" } }
+
                     }
                 }
             };
@@ -436,12 +440,86 @@ namespace Automaton
             if (isNFA(automaton))
             {
                 MessageBox.Show("The automaton is Finite Non-Deterministic (NFA)");
+                ConvertToDeterministic(automaton);
             }
             else
             {
                 MessageBox.Show("The automaton is Deterministic Finite (DFA)");
             }
             GraphicAutomaton(automaton);
+        }
+
+        private void ConvertToDeterministic(Dictionary<string, object> dict)
+        {
+            // Referencia a las transiciones {Key=(state, symbol): Value}
+            var transitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
+            var states = (List<string>)dict["states"];
+            var symbols = (List<string>)dict["symbols"];
+
+
+
+            foreach (var transition in transitions)
+            {
+                // Verificar si hay más de un destino para la misma transición
+                if (transition.Value.Count != 1 && transition.Value.Count > 0)
+                {
+                    var newState = string.Empty;
+                    // Si hay más de un destino, unirlo
+                    foreach (var state in transition.Value)
+                    {
+                        newState = newState + state;
+                    }
+                    transition.Value.Clear();
+                    transition.Value.Add(newState);
+                    states.Add(newState);
+                }
+            }
+
+
+
+            //else if(transition.Value.Count == 0)
+            //{
+            //    transition.Value.Add("Error");
+            //}
+            //foreach (var stateDestination in states)
+            //{
+            //    // Verificar que para los valores ingresados no existe el destino
+            //    if (transitions[(stateOrigin, symbol)].Contains(null))
+            //    {
+            //        // Agregar "error"
+            //        transitions[(stateOrigin, symbol)].Add("Error");
+            //    }
+            //}
+
+            //Validar si hay estados nuevos
+            var keys = transitions.Keys.Select(x => x.state).ToArray();
+            foreach (var stateOrigin in states)
+            {
+                foreach (var symbol in symbols)
+                {
+                    //validar si ya se ha usado el estado entrante como estado de origen en otra transicion
+                    if (!keys.Contains(stateOrigin))
+                    {
+                        //Se busca transiciones donde el estado de origen coincida con su entrada
+                        var statesSearched = new string[stateOrigin.Length];
+                        foreach (char letra in stateOrigin.ToCharArray())
+                        {
+                            statesSearched.Append(letra)
+                        }
+                        //Crear transicion
+                        //Comparar de acuerdo a como estan puestos los anteriores estados
+
+                    }
+
+                }
+
+            }
+
+
+            //Reordenar y agregar error
+            Console.WriteLine(transitions);
+            Console.WriteLine(states);
+            Console.WriteLine(symbols);
         }
 
         private void btnAddInitialState_Click(object sender, EventArgs e)
