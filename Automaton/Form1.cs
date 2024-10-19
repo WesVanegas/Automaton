@@ -455,71 +455,67 @@ namespace Automaton
             var transitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
             var states = (List<string>)dict["states"];
             var symbols = (List<string>)dict["symbols"];
+            var initialState = (List<string>)dict["initialState"];
 
 
-
-            foreach (var transition in transitions)
-            {
-                // Verificar si hay más de un destino para la misma transición
-                if (transition.Value.Count != 1 && transition.Value.Count > 0)
-                {
-                    var newState = string.Empty;
-                    // Si hay más de un destino, unirlo
-                    foreach (var state in transition.Value)
-                    {
-                        newState = newState + state;
-                    }
-                    transition.Value.Clear();
-                    transition.Value.Add(newState);
-                    states.Add(newState);
-                }
-            }
-
-
-
-            //else if(transition.Value.Count == 0)
-            //{
-            //    transition.Value.Add("Error");
-            //}
-            //foreach (var stateDestination in states)
-            //{
-            //    // Verificar que para los valores ingresados no existe el destino
-            //    if (transitions[(stateOrigin, symbol)].Contains(null))
-            //    {
-            //        // Agregar "error"
-            //        transitions[(stateOrigin, symbol)].Add("Error");
-            //    }
-            //}
-
-            //Validar si hay estados nuevos
             var keys = transitions.Keys.Select(x => x.state).ToArray();
-            foreach (var stateOrigin in states)
+            var newTransitions = new Dictionary<(string state, string symbol), List<string>>();
+
+
+            var initialStateTransitions = transitions.Where(x => x.Key.state == initialState[0]);
+            foreach (var tr in initialStateTransitions)
             {
+                if (tr.Key.state != null && tr.Key.symbol != null)
+                {
+                    newTransitions.Add(tr.Key, tr.Value);
+
+                }
+
+            }
+            if (initialStateTransitions.Count() != symbols.Count)
+            {
+                var symbolsInitialState = initialStateTransitions.Select(x => x.Key.symbol);
                 foreach (var symbol in symbols)
                 {
-                    //validar si ya se ha usado el estado entrante como estado de origen en otra transicion
-                    if (!keys.Contains(stateOrigin))
+                    if (!symbolsInitialState.Contains(symbol))
                     {
-                        //Se busca transiciones donde el estado de origen coincida con su entrada
-                        var statesSearched = new string[stateOrigin.Length];
-                        foreach (char letra in stateOrigin.ToCharArray())
-                        {
-                            statesSearched.Append(letra)
-                        }
-                        //Crear transicion
-                        //Comparar de acuerdo a como estan puestos los anteriores estados
-
+                        newTransitions.Add((initialState[0], symbol), null);
                     }
-
                 }
-
             }
 
+            foreach (var tr in initialStateTransitions)
+            {
 
-            //Reordenar y agregar error
+                if (tr.Value.Count == 0)
+                {
+                    tr.Value.Add("Error");
+                }
+                else
+                {
+                    //Por cada estado de destino, se crea una nueva transición que se llenará posteriormente
+                    CreateTransitionByDestination(newTransitions, symbols, tr.Value);
+                }
+            }
+
+            //Empezar a partir de los demas estados, rellenar transiciones y posteriormente ir bajando estados
+
+            Console.WriteLine(newTransitions);
+
             Console.WriteLine(transitions);
             Console.WriteLine(states);
             Console.WriteLine(symbols);
+        }
+
+        private void CreateTransitionByDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols, List<string> tr)
+        {
+            foreach (var destination in tr)
+            {
+                foreach (var symbol in symbols)
+                {
+                    newTransitions.Add((destination, symbol), null);
+                }
+            }
         }
 
         private void btnAddInitialState_Click(object sender, EventArgs e)
