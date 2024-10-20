@@ -49,8 +49,8 @@ namespace Automaton
                     // Si no existe, se agrega al automata
                     dictSymbols.Add(symbol);
                     //MessageBox.Show($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
-                    ShowTextinLog($"Se agregó símbolo: {symbol}");
-                    ShowTextinLog($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
+                    ShowTextinLog($"Symbol added: {symbol}");
+                    ShowTextinLog($"Symbols: {string.Join(", ", (List<string>)dict["symbols"])}");
 
                 }
             }
@@ -68,15 +68,15 @@ namespace Automaton
                 if (dictStates.Contains(state))
                 {
                     //MessageBox.Show($"Estado {state} ya existe!");
-                    ShowTextinLog($"Estado: {state} ya existe!");
+                    ShowTextinLog($"State: {state} already exists!");
                 }
                 else
                 {
                     // Si no existe, se agrega al automata
                     dictStates.Add(state);
                     //MessageBox.Show($"Estados: {string.Join(", ", (List<string>)dict["states"])}");
-                    ShowTextinLog($"Se agregó estado: {state}");
-                    ShowTextinLog($"Estados: {string.Join(", ", (List<string>)dict["states"])}");
+                    ShowTextinLog($"State was added: {state}");
+                    ShowTextinLog($"States: {string.Join(", ", (List<string>)dict["states"])}");
                 }
             }
         }
@@ -119,7 +119,7 @@ namespace Automaton
             else
             {
                 //MessageBox.Show($"Estado {state} no existe!");
-                ShowTextinLog($"Estado {state} no existe!");
+                ShowTextinLog($"State {state} does not exist!");
             }
         }
 
@@ -140,12 +140,12 @@ namespace Automaton
                 {
                     dictAcceptanceStates.Add(state);
                     //MessageBox.Show($"Se agregó estado de aceptación {state}");
-                    ShowTextinLog($"Se agregó estado de aceptación {state}");
+                    ShowTextinLog($"Acceptance state added {state}");
                 }
                 else
                 {
                     //MessageBox.Show($"No se pudo agregar estado {state}\nNo existe como estado o ya se encuentra en los estados que aceptan.");
-                    ShowTextinLog($"No se agregó estado de aceptación: {state}");
+                    ShowTextinLog($"No acceptance state added: {state}");
                 }
             }
 
@@ -181,12 +181,12 @@ namespace Automaton
                         // Agregar nuevo destino
                         dictTransitions[(origin, symbol)].Add(destination);
                         //MessageBox.Show($"Transición ({origin},{symbol})={destination} Agregada!");
-                        ShowTextinLog($"Transición ({origin},{symbol})={destination} Agregada!");
+                        ShowTextinLog($"Transition ({origin},{symbol})={destination} added!");
                     }
                     else
                     {
                         //MessageBox.Show($"Transición ({origin},{symbol})={destination} Ya existe!\n No se puede agregar nuevamente.");
-                        ShowTextinLog($"Transición ({origin},{symbol})={destination} Ya existe!");
+                        ShowTextinLog($"Transition ({origin},{symbol})={destination} already exist!");
                     }
 
                 }
@@ -195,13 +195,13 @@ namespace Automaton
                     // Si no existe la transición con el estado y simbolo ingresado, se agrega al automata
                     dictTransitions.Add((origin, symbol), new List<string> { destination });
                     //MessageBox.Show($"Transición ({origin},{symbol})={destination} Agregada!");
-                    ShowTextinLog($"Transición ({origin},{symbol})={destination} Agregada!");
+                    ShowTextinLog($"Transition ({origin},{symbol})={destination} added!");
                 }
             }
             else
             {
                 //MessageBox.Show($"Transición ({origin},{symbol})={destination} no agregada!\nRevisar valores ingresados");
-                ShowTextinLog($"Transición: ({origin},{symbol})={destination} no agregada!");
+                ShowTextinLog($"Transition: ({origin},{symbol})={destination} was not added!");
             }
 
         }
@@ -277,7 +277,7 @@ namespace Automaton
                 sb.AppendLine($"{item.Key}: {ValueConverter(item.Value)}");
             }
 
-            MessageBox.Show(sb.ToString(), "Contenido del automata");
+            MessageBox.Show(sb.ToString(), "Contents of the automaton");
         }
 
         private static string ValueConverter(object value)
@@ -332,7 +332,7 @@ namespace Automaton
             dictInitialState.Clear();
             dictAcceptanceStates.Clear();
             dictTransitions.Clear();
-            ShowTextinLog("Se borraron los datos del automata.");
+            ShowTextinLog("The data on the automaton has been erased.");
         }
 
 
@@ -386,8 +386,8 @@ namespace Automaton
                 }
                 else
                 {
-                    MessageBox.Show("Automata sin suficientes datos para graficar.");
-                    ShowTextinLog("Faltan datos. Se debe indicar cual es el estado inicial.");
+                    MessageBox.Show("Automata without enough data to graph.");
+                    ShowTextinLog("Data is missing. The initial state must be indicated.");
                 }
 
                 foreach (var transition in transitions)
@@ -405,11 +405,11 @@ namespace Automaton
             {
                 if (isNFA(dict))
                 {
-                    MessageBox.Show("El automata es Finito NO Determinista (NFA)");
+                    MessageBox.Show("The automaton is Finite NOT Deterministic (NFA)");
                 }
                 else
                 {
-                    MessageBox.Show("El automata es Finito Determinista (DFA)");
+                    MessageBox.Show("The automaton is Finite Deterministic (DFA)");
                 }
             }
 
@@ -436,7 +436,7 @@ namespace Automaton
             if (!System.IO.File.Exists(graphvizPath))
             {
                 //MessageBox.Show($"El archivo dot.exe no se encuentra en la ruta: {graphvizPath}");
-                ShowTextinLog($"El archivo dot.exe no se encuentra en la ruta: {graphvizPath}");
+                ShowTextinLog($"The dot.exe file is not located in the path: {graphvizPath}");
             }
 
             using (Process process = Process.Start(processStartInfo))
