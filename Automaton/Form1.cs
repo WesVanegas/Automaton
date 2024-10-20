@@ -542,25 +542,7 @@ namespace Automaton
 
                         }
 
-                        if (transitions.Keys.Contains(tr.Key))
-                        {
-                            var values = transitions.Where(x => x.Key == tr.Key).SelectMany(x => x.Value).ToList();
-                            if(values.Count > 1)
-                            {
-                                var concatenatedValues = string.Join("", values);
-                                newTransitions[tr.Key] = new List<string> { concatenatedValues };
-                            }
-                            else
-                            {
-                                newTransitions[tr.Key] = values;
-                            }
-                        }
-                        else
-                        {
-                            //Si no hay estado que coincida con la key, añadir error como destino
-                            newTransitions[tr.Key] = new List<string> { "Error" };
-                        }
-
+                        AddDestination(newTransitions, transitions, tr);
                     }
                     //Crear siguientes transiciones
                     var updatedValue = newTransitions[tr.Key];
@@ -574,6 +556,28 @@ namespace Automaton
             Console.WriteLine(transitions);
         }
 
+        private void AddDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, Dictionary<(string state, string symbol), List<string>> transitions, KeyValuePair<(string state, string symbol), List<string>> tr)
+        {
+
+            if (transitions.Keys.Contains(tr.Key))
+            {
+                var values = transitions.Where(x => x.Key == tr.Key).SelectMany(x => x.Value).ToList();
+                if (values.Count > 1)
+                {
+                    var concatenatedValues = string.Join("", values);
+                    newTransitions[tr.Key] = new List<string> { concatenatedValues };
+                }
+                else
+                {
+                    newTransitions[tr.Key] = values;
+                }
+            }
+            else
+            {
+                //Si no hay estado que coincida con la key, añadir error como destino
+                newTransitions[tr.Key] = new List<string> { "Error" };
+            }
+        }
         private void CreateTransitionByDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols, List<string> tr)
         {
             if (tr != null)
