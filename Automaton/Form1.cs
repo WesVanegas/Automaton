@@ -10,11 +10,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Markup;
+using static System.Windows.Forms.AxHost;
 
 namespace Automaton
 {
     public partial class Form1 : Form
     {
+
+        private void ShowTextinLog(string text)
+        {
+            //txtLog.Text += text + Environment.NewLine;
+            var timestamp = DateTime.Now.ToString("HH:mm:ss");
+            txtLog.Text += $"{timestamp}: {text}{Environment.NewLine}";
+            txtLog.SelectionStart = txtLog.Text.Length;
+            txtLog.ScrollToCaret();
+        }
+
         // Add new symbols function
         private void AddSymbols(Dictionary<string, object> dict, string symbols)
         {
@@ -30,13 +41,17 @@ namespace Automaton
                 // Verificar que el o los simbolos ingresados no existan
                 if (dictSymbols.Contains(symbol))
                 {
-                    MessageBox.Show($"The symbol '{symbol}' already exists!");
+                    //MessageBox.Show($"Simbolo {symbol} ya existe!");
+                    ShowTextinLog($"Simbolo {symbol} ya existe!");
                 }
                 else
                 {
                     // Si no existe, se agrega al automata
                     dictSymbols.Add(symbol);
-                    MessageBox.Show($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
+                    //MessageBox.Show($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
+                    ShowTextinLog($"Se agregó símbolo: {symbol}");
+                    ShowTextinLog($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
+                    
                 }
             }
         }
@@ -52,13 +67,16 @@ namespace Automaton
                 // Verificar que el o los estados ingresadso no existan
                 if (dictStates.Contains(state))
                 {
-                    MessageBox.Show($"The state '{state}' already exists!");
+                    //MessageBox.Show($"Estado {state} ya existe!");
+                    ShowTextinLog($"Estado: {state} ya existe!");
                 }
                 else
                 {
                     // Si no existe, se agrega al automata
                     dictStates.Add(state);
-                    MessageBox.Show($"Símbolos: {string.Join(", ", (List<string>)dict["states"])}");
+                    //MessageBox.Show($"Estados: {string.Join(", ", (List<string>)dict["states"])}");
+                    ShowTextinLog($"Se agregó estado: {state}");
+                    ShowTextinLog($"Estados: {string.Join(", ", (List<string>)dict["states"])}");
                 }
             }
         }
@@ -84,14 +102,14 @@ namespace Automaton
                     dictInitialState.Add(state);
 
                     // Poner en primera posición el estado inical para facilitar la grafica
-                    MessageBox.Show($"Before State: {string.Join(",", dictStates)}");
+                    //MessageBox.Show($"Before State: {string.Join(",", dictStates)}");
                     int index = dictStates.IndexOf(state);
                     if (index != 0)
                     {
                         dictStates.RemoveAt(index);
                         dictStates.Insert(0, state);
                     }
-                    MessageBox.Show($"After State: {string.Join(",", dictStates)}");
+                    //MessageBox.Show($"After State: {string.Join(",", dictStates)}");
                 }
                 else
                 {
@@ -100,7 +118,8 @@ namespace Automaton
             }
             else
             {
-                MessageBox.Show($"State '{state}' does not exist!");
+                //MessageBox.Show($"Estado {state} no existe!");
+                ShowTextinLog($"Estado {state} no existe!");
             }
         }
 
@@ -120,11 +139,13 @@ namespace Automaton
                 if (dictStates.Contains(state) & !dictAcceptanceStates.Contains(state))
                 {
                     dictAcceptanceStates.Add(state);
-                    MessageBox.Show($"Se agregó estado de aceptación {state}");
+                    //MessageBox.Show($"Se agregó estado de aceptación {state}");
+                    ShowTextinLog($"Se agregó estado de aceptación {state}");
                 }
                 else
                 {
-                    MessageBox.Show($"No se pudo agregar estado {state}\nNo existe como estado o ya se encuentra en los estados que aceptan.");
+                    //MessageBox.Show($"No se pudo agregar estado {state}\nNo existe como estado o ya se encuentra en los estados que aceptan.");
+                    ShowTextinLog($"No se agregó estado de aceptación: {state}");
                 }
             }
 
@@ -159,11 +180,13 @@ namespace Automaton
                     {
                         // Agregar nuevo destino
                         dictTransitions[(origin, symbol)].Add(destination);
-                        MessageBox.Show($"Transición ({origin},{symbol})={destination} Agregada!");
+                        //MessageBox.Show($"Transición ({origin},{symbol})={destination} Agregada!");
+                        ShowTextinLog($"Transición ({origin},{symbol})={destination} Agregada!");
                     }
                     else
                     {
-                        MessageBox.Show($"Transición ({origin},{symbol})={destination} Ya existe!\n No se puede agregar nuevamente.");
+                        //MessageBox.Show($"Transición ({origin},{symbol})={destination} Ya existe!\n No se puede agregar nuevamente.");
+                        ShowTextinLog($"Transición ({origin},{symbol})={destination} Ya existe!");
                     }
 
                 }
@@ -171,12 +194,14 @@ namespace Automaton
                 {
                     // Si no existe la transición con el estado y simbolo ingresado, se agrega al automata
                     dictTransitions.Add((origin, symbol), new List<string> { destination });
-                    MessageBox.Show($"Transición ({origin},{symbol})={destination} Agregada!");
+                    //MessageBox.Show($"Transición ({origin},{symbol})={destination} Agregada!");
+                    ShowTextinLog($"Transición ({origin},{symbol})={destination} Agregada!");
                 }
             }
             else
             {
-                MessageBox.Show($"Transición ({origin},{symbol})={destination} no agregada!\nRevisar valores ingresados");
+                //MessageBox.Show($"Transición ({origin},{symbol})={destination} no agregada!\nRevisar valores ingresados");
+                ShowTextinLog($"Transición: ({origin},{symbol})={destination} no agregada!");
             }
 
         }
@@ -239,7 +264,7 @@ namespace Automaton
 
 
         // Convert NFA to DFA function
-
+       
 
 
         // Show automaton data
@@ -282,6 +307,7 @@ namespace Automaton
                 pictureBox1.Image = null;
                 pictureBox1.Update();
             }
+            
             //Referencias a cada llave del diccionarion
             var dictSymbols = (List<string>)dict["symbols"];
             var dictStates = (List<string>)dict["states"];
@@ -293,14 +319,12 @@ namespace Automaton
             {
                 File.Delete("automato.dot");
             }
-
+            
 
             if (File.Exists("automato.png"))
             {
                 File.Delete("automato.png");
             }
-
-
 
             // Borrar el contenido
             dictSymbols.Clear();
@@ -308,6 +332,7 @@ namespace Automaton
             dictInitialState.Clear();
             dictAcceptanceStates.Clear();
             dictTransitions.Clear();
+            ShowTextinLog("Se borraron los datos del automata.");
         }
 
 
@@ -315,6 +340,17 @@ namespace Automaton
         // Create graphic from Dot file
         private void GraphicAutomaton(Dictionary<string, object> dict)
         {
+            if (pictureBox1.Image != null)
+            {
+                pictureBox1.Image.Dispose();
+                pictureBox1.Image = null;
+                pictureBox1.Update();
+            }
+            
+            if (File.Exists("automato.png"))
+            {
+                File.Delete("automato.png");
+            }
             // Crear archivo Dot
 
             // Referencia a los estados de aceptación
@@ -329,7 +365,13 @@ namespace Automaton
             using (StreamWriter writer = new StreamWriter("automato.dot"))
             {
                 writer.WriteLine("digraph G {");
-                writer.WriteLine(" Inicio [shape=none];");
+                // La siguiente línea es para que el diagrama sea horizontal
+		        //writer.WriteLine("rankdir=LR;");
+                if (initialState.Count == 1)
+                {
+                    writer.WriteLine(" Inicio [shape=none];");
+                }
+                
 
                 foreach (var item in (List<string>)dict["states"])
                 {
@@ -337,8 +379,16 @@ namespace Automaton
 
                     writer.WriteLine($" {item} [shape={shape}];");
                 }
-
-                writer.WriteLine($" Inicio -> {initialState[0]};");
+                //var initial = initialState.Count()==0 ? "empty" : $"{initialState[0]}";
+                if (initialState.Count() != 0)
+                {
+                    writer.WriteLine($" Inicio -> {initialState[0]};");
+                }
+                else
+                {
+                    MessageBox.Show("Automata sin suficientes datos para graficar.");
+                    ShowTextinLog("Faltan datos. Se debe indicar cual es el estado inicial.");
+                }
 
                 foreach (var transition in transitions)
                 {
@@ -351,10 +401,23 @@ namespace Automaton
             }
             //MessageBox.Show("Archivo Dot generado");
 
+            if (initialState.Count == 1)
+            {
+                if (isNFA(dict))
+                {
+                    MessageBox.Show("El automata es Finito NO Determinista (NFA)");
+                }
+                else
+                {
+                    MessageBox.Show("El automata es Finito Determinista (DFA)");
+                }
+            }
+
             // Graficar con Graphviz usando el archivo Dot como referencia
 
             // variable que contiene la ruta a dot.exe en la carpte Graphviz
-            string graphvizPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Graphviz", "bin", "dot.exe");
+            //string graphvizPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Graphviz", "bin", "dot.exe");
+            string graphvizPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Graphviz", "bin", "dot.exe");
 
             //MessageBox.Show($"Ruta graphviz: {graphvizPath}");
 
@@ -369,6 +432,12 @@ namespace Automaton
                 UseShellExecute = false,
                 CreateNoWindow = true,
             };
+
+            if (!System.IO.File.Exists(graphvizPath))
+            {
+                //MessageBox.Show($"El archivo dot.exe no se encuentra en la ruta: {graphvizPath}");
+                ShowTextinLog($"El archivo dot.exe no se encuentra en la ruta: {graphvizPath}");
+            }
 
             using (Process process = Process.Start(processStartInfo))
             {
