@@ -51,7 +51,7 @@ namespace Automaton
                     //MessageBox.Show($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
                     ShowTextinLog($"Se agregó símbolo: {symbol}");
                     ShowTextinLog($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
-                    
+
                 }
             }
         }
@@ -264,7 +264,7 @@ namespace Automaton
 
 
         // Convert NFA to DFA function
-       
+
 
 
         // Show automaton data
@@ -307,7 +307,7 @@ namespace Automaton
                 pictureBox1.Image = null;
                 pictureBox1.Update();
             }
-            
+
             //Referencias a cada llave del diccionarion
             var dictSymbols = (List<string>)dict["symbols"];
             var dictStates = (List<string>)dict["states"];
@@ -319,7 +319,7 @@ namespace Automaton
             {
                 File.Delete("automato.dot");
             }
-            
+
 
             if (File.Exists("automato.png"))
             {
@@ -346,7 +346,7 @@ namespace Automaton
                 pictureBox1.Image = null;
                 pictureBox1.Update();
             }
-            
+
             if (File.Exists("automato.png"))
             {
                 File.Delete("automato.png");
@@ -366,12 +366,12 @@ namespace Automaton
             {
                 writer.WriteLine("digraph G {");
                 // La siguiente línea es para que el diagrama sea horizontal
-		        //writer.WriteLine("rankdir=LR;");
+                //writer.WriteLine("rankdir=LR;");
                 if (initialState.Count == 1)
                 {
                     writer.WriteLine(" Inicio [shape=none];");
                 }
-                
+
 
                 foreach (var item in (List<string>)dict["states"])
                 {
@@ -508,12 +508,7 @@ namespace Automaton
         {
             if (isNFA(automaton))
             {
-                MessageBox.Show("The automaton is Finite Non-Deterministic (NFA)");
                 ConvertToDeterministic(automaton);
-            }
-            else
-            {
-                MessageBox.Show("The automaton is Deterministic Finite (DFA)");
             }
             GraphicAutomaton(automaton);
         }
@@ -530,53 +525,87 @@ namespace Automaton
 
             //Empezar a partir de los demas estados, rellenar transiciones
 
-            while(newTransitions.Any(tr => tr.Value == null || tr.Value.Count == 0))
+            while (newTransitions.Any(tr => tr.Value == null || tr.Value.Count == 0))
             {
                 foreach (var tr in newTransitions.ToList())
                 {
                     //Si la transición no tiene destino, buscar si existe en la transición vieja para asignarle el estado
                     if (tr.Value == null || tr.Value.Count == 0)
                     {
-                        if(tr.Key.symbol.Count() > 1)
-                        {
-
-                        }
-
-                        AddDestination(newTransitions, transitions, tr);
+                        AddDestination(newTransitions, transitions, tr, symbols);
                     }
                     //Crear siguientes transiciones
                     var updatedValue = newTransitions[tr.Key];
                     CreateTransitionByDestination(newTransitions, symbols, updatedValue);
 
                 }
+
             }
-          
+
             Console.WriteLine(newTransitions);
 
-            Console.WriteLine(transitions);
         }
 
-        private void AddDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, Dictionary<(string state, string symbol), List<string>> transitions, KeyValuePair<(string state, string symbol), List<string>> tr)
+        private void AddDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, Dictionary<(string state, string symbol), List<string>> transitions, KeyValuePair<(string state, string symbol), List<string>> tr, List<string> symbols)
         {
-
-            if (transitions.Keys.Contains(tr.Key))
+            if (tr.Key.state.Count() > 1 && tr.Key.state != "Error")
             {
-                var values = transitions.Where(x => x.Key == tr.Key).SelectMany(x => x.Value).ToList();
-                if (values.Count > 1)
+                var states = new List<string>();
+                var valuesCompleted = new List<string>();
+                foreach (var state in tr.Key.state)
                 {
-                    var concatenatedValues = string.Join("", values);
+                    states.Add(state.ToString());
+                }
+
+                //Hay que buscar por cada estado, su destino
+                foreach (var item in states)
+                {
+                    var symbol = tr.Key.symbol;
+                    var values = transitions.Where(x => x.Key == (item, symbol)).SelectMany(x => x.Value).ToList();
+                    foreach (var item1 in values)
+                    {
+                        valuesCompleted.Add(item1);
+
+                    }
+                }
+
+                if (valuesCompleted.Count > 1)
+                {
+                    var concatenatedValues = string.Join("", valuesCompleted);
                     newTransitions[tr.Key] = new List<string> { concatenatedValues };
+                }
+                else if (valuesCompleted.Count == 1)
+                {
+                    newTransitions[tr.Key] = valuesCompleted;
                 }
                 else
                 {
-                    newTransitions[tr.Key] = values;
+                    newTransitions[tr.Key] = new List<string> { "Error" };
                 }
+
             }
             else
             {
-                //Si no hay estado que coincida con la key, añadir error como destino
-                newTransitions[tr.Key] = new List<string> { "Error" };
+                if (transitions.Keys.Contains(tr.Key))
+                {
+                    var values = transitions.Where(x => x.Key == tr.Key).SelectMany(x => x.Value).ToList();
+                    if (values.Count > 1)
+                    {
+                        var concatenatedValues = string.Join("", values);
+                        newTransitions[tr.Key] = new List<string> { concatenatedValues };
+                    }
+                    else
+                    {
+                        newTransitions[tr.Key] = values;
+                    }
+                }
+                else
+                {
+                    //Si no hay estado que coincida con la key, añadir error como destino
+                    newTransitions[tr.Key] = new List<string> { "Error" };
+                }
             }
+
         }
         private void CreateTransitionByDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols, List<string> tr)
         {
