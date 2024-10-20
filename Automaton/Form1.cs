@@ -455,13 +455,77 @@ namespace Automaton
             var transitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
             var states = (List<string>)dict["states"];
             var symbols = (List<string>)dict["symbols"];
-            var initialState = (List<string>)dict["initialState"];
-
-
-            var keys = transitions.Keys.Select(x => x.state).ToArray();
             var newTransitions = new Dictionary<(string state, string symbol), List<string>>();
 
+            CreateInitialTransition(dict, transitions, newTransitions, symbols);
 
+            //Empezar a partir de los demas estados, rellenar transiciones
+
+            while(newTransitions.Any(tr => tr.Value == null || tr.Value.Count == 0))
+            {
+                foreach (var tr in newTransitions.ToList())
+                {
+                    //Si la transición no tiene destino, buscar si existe en la transición vieja para asignarle el estado
+                    if (tr.Value == null || tr.Value.Count == 0)
+                    {
+                        if(tr.Key.symbol.Count() > 1)
+                        {
+
+                        }
+
+                        if (transitions.Keys.Contains(tr.Key))
+                        {
+                            var values = transitions.Where(x => x.Key == tr.Key).SelectMany(x => x.Value).ToList();
+                            if(values.Count > 1)
+                            {
+                                var concatenatedValues = string.Join("", values);
+                                newTransitions[tr.Key] = new List<string> { concatenatedValues };
+                            }
+                            else
+                            {
+                                newTransitions[tr.Key] = values;
+                            }
+                        }
+                        else
+                        {
+                            //Si no hay estado que coincida con la key, añadir error como destino
+                            newTransitions[tr.Key] = new List<string> { "Error" };
+                        }
+
+                    }
+                    //Crear siguientes transiciones
+                    var updatedValue = newTransitions[tr.Key];
+                    CreateTransitionByDestination(newTransitions, symbols, updatedValue);
+
+                }
+            }
+          
+            Console.WriteLine(newTransitions);
+
+            Console.WriteLine(transitions);
+        }
+
+        private void CreateTransitionByDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols, List<string> tr)
+        {
+            if (tr != null)
+            {
+                foreach (var destination in tr)
+                {
+                    foreach (var symbol in symbols)
+                    {
+                        if (!newTransitions.Keys.Contains((destination, symbol)))
+                        {
+                            newTransitions.Add((destination, symbol), new List<string>());
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CreateInitialTransition(Dictionary<string, object> dict, Dictionary<(string state, string symbol), List<string>> transitions, Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols)
+        {
+            var initialState = (List<string>)dict["initialState"];
+            var keys = transitions.Keys.Select(x => x.state).ToArray();
             var initialStateTransitions = transitions.Where(x => x.Key.state == initialState[0]);
             foreach (var tr in initialStateTransitions)
             {
@@ -479,60 +543,16 @@ namespace Automaton
                 {
                     if (!symbolsInitialState.Contains(symbol))
                     {
-                        newTransitions.Add((initialState[0], symbol), null);
+                        newTransitions.Add((initialState[0], symbol), new List<string>());
                     }
                 }
             }
 
             foreach (var tr in initialStateTransitions)
             {
+                //Por cada estado de destino, se crea una nueva transición que se llenará posteriormente
+                CreateTransitionByDestination(newTransitions, symbols, tr.Value);
 
-                if (tr.Value.Count == 0)
-                {
-                    tr.Value.Add("Error");
-                }
-                else
-                {
-                    //Por cada estado de destino, se crea una nueva transición que se llenará posteriormente
-                    CreateTransitionByDestination(newTransitions, symbols, tr.Value);
-                
-                }
-            }
-
-            //Empezar a partir de los demas estados, rellenar transiciones y posteriormente ir bajando estados
-
-            foreach(var tr in newTransitions)
-            {
-                //Si la transición no tiene destino, buscar si existe en la transición vieja para asignarle el estado
-                if(tr.Value == null)
-                {
-                    tr.Value = new List<string>();
-                    if (transitions.Keys.Contains(tr.Key))
-                    {
-                        var values = transitions.Where(x => x.Key == tr.Key).SelectMany(x => x.Value).ToList();
-                        foreach (var value in values)
-                        {
-                            tr.Value.Add(value);
-
-                        }
-                    }
-                }
-            }
-            Console.WriteLine(newTransitions);
-
-            Console.WriteLine(transitions);
-            Console.WriteLine(states);
-            Console.WriteLine(symbols);
-        }
-
-        private void CreateTransitionByDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols, List<string> tr)
-        {
-            foreach (var destination in tr)
-            {
-                foreach (var symbol in symbols)
-                {
-                    newTransitions.Add((destination, symbol), null);
-                }
             }
         }
 
