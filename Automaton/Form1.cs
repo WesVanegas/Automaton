@@ -495,11 +495,29 @@ namespace Automaton
                 {
                     //Por cada estado de destino, se crea una nueva transición que se llenará posteriormente
                     CreateTransitionByDestination(newTransitions, symbols, tr.Value);
+                
                 }
             }
 
             //Empezar a partir de los demas estados, rellenar transiciones y posteriormente ir bajando estados
 
+            foreach(var tr in newTransitions)
+            {
+                //Si la transición no tiene destino, buscar si existe en la transición vieja para asignarle el estado
+                if(tr.Value == null)
+                {
+                    tr.Value = new List<string>();
+                    if (transitions.Keys.Contains(tr.Key))
+                    {
+                        var values = transitions.Where(x => x.Key == tr.Key).SelectMany(x => x.Value).ToList();
+                        foreach (var value in values)
+                        {
+                            tr.Value.Add(value);
+
+                        }
+                    }
+                }
+            }
             Console.WriteLine(newTransitions);
 
             Console.WriteLine(transitions);
