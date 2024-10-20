@@ -541,8 +541,10 @@ namespace Automaton
                 }
 
             }
+            List<string> newStates = newTransitions.Keys.SelectMany(x => x.state).Select(c => c.ToString()).ToList();
 
-            Console.WriteLine(newTransitions);
+            automaton["states"] = newStates;
+            automaton["transitions"] = newTransitions;
 
         }
 
