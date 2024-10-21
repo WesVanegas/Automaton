@@ -30,12 +30,13 @@ namespace Automaton
         private void AddSymbols(Dictionary<string, object> dict, string symbols)
         {
             // Quitar espacios y divisiones si es mas de un caracter ingresado
-            string[] newSymbols = symbols.Split(new char[] { ' ', ',', '.', '-'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] newSymbols = symbols.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
 
             //Referencia a la lista de simbolos en el diccionario
             var dictSymbols = (List<string>)dict["symbols"];
 
-            foreach (string symbol in newSymbols) {
+            foreach (string symbol in newSymbols)
+            {
 
                 // Verificar que el o los simbolos ingresados no existan
                 if (dictSymbols.Contains(symbol))
@@ -48,9 +49,9 @@ namespace Automaton
                     // Si no existe, se agrega al automata
                     dictSymbols.Add(symbol);
                     //MessageBox.Show($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
-                    ShowTextinLog($"Se agregó símbolo: {symbol}");
-                    ShowTextinLog($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
-                    
+                    ShowTextinLog($"Symbol added: {symbol}");
+                    ShowTextinLog($"Symbols: {string.Join(", ", (List<string>)dict["symbols"])}");
+
                 }
             }
         }
@@ -61,21 +62,21 @@ namespace Automaton
             string[] newStates = states.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
             //Referencia a la lista de simbolos en el diccionario
             var dictStates = (List<string>)dict["states"];
-            foreach (string state in newStates) 
+            foreach (string state in newStates)
             {
                 // Verificar que el o los estados ingresadso no existan
                 if (dictStates.Contains(state))
                 {
                     //MessageBox.Show($"Estado {state} ya existe!");
-                    ShowTextinLog($"Estado: {state} ya existe!");
+                    ShowTextinLog($"State: {state} already exists!");
                 }
                 else
                 {
                     // Si no existe, se agrega al automata
                     dictStates.Add(state);
                     //MessageBox.Show($"Estados: {string.Join(", ", (List<string>)dict["states"])}");
-                    ShowTextinLog($"Se agregó estado: {state}");
-                    ShowTextinLog($"Estados: {string.Join(", ", (List<string>)dict["states"])}");
+                    ShowTextinLog($"State was added: {state}");
+                    ShowTextinLog($"States: {string.Join(", ", (List<string>)dict["states"])}");
                 }
             }
         }
@@ -112,13 +113,13 @@ namespace Automaton
                 }
                 else
                 {
-                    MessageBox.Show($"Ya hay definido un estado inicial: {dictInitialState[0]}");
+                    MessageBox.Show($"There is already a initial state: {dictInitialState[0]}");
                 }
             }
             else
             {
                 //MessageBox.Show($"Estado {state} no existe!");
-                ShowTextinLog($"Estado {state} no existe!");
+                ShowTextinLog($"State {state} does not exist!");
             }
         }
 
@@ -139,12 +140,12 @@ namespace Automaton
                 {
                     dictAcceptanceStates.Add(state);
                     //MessageBox.Show($"Se agregó estado de aceptación {state}");
-                    ShowTextinLog($"Se agregó estado de aceptación {state}");
+                    ShowTextinLog($"Acceptance state added {state}");
                 }
                 else
                 {
                     //MessageBox.Show($"No se pudo agregar estado {state}\nNo existe como estado o ya se encuentra en los estados que aceptan.");
-                    ShowTextinLog($"No se agregó estado de aceptación: {state}");
+                    ShowTextinLog($"No acceptance state added: {state}");
                 }
             }
 
@@ -180,12 +181,12 @@ namespace Automaton
                         // Agregar nuevo destino
                         dictTransitions[(origin, symbol)].Add(destination);
                         //MessageBox.Show($"Transición ({origin},{symbol})={destination} Agregada!");
-                        ShowTextinLog($"Transición ({origin},{symbol})={destination} Agregada!");
+                        ShowTextinLog($"Transition ({origin},{symbol})={destination} added!");
                     }
                     else
                     {
                         //MessageBox.Show($"Transición ({origin},{symbol})={destination} Ya existe!\n No se puede agregar nuevamente.");
-                        ShowTextinLog($"Transición ({origin},{symbol})={destination} Ya existe!");
+                        ShowTextinLog($"Transition ({origin},{symbol})={destination} already exist!");
                     }
 
                 }
@@ -194,13 +195,13 @@ namespace Automaton
                     // Si no existe la transición con el estado y simbolo ingresado, se agrega al automata
                     dictTransitions.Add((origin, symbol), new List<string> { destination });
                     //MessageBox.Show($"Transición ({origin},{symbol})={destination} Agregada!");
-                    ShowTextinLog($"Transición ({origin},{symbol})={destination} Agregada!");
+                    ShowTextinLog($"Transition ({origin},{symbol})={destination} added!");
                 }
             }
             else
             {
                 //MessageBox.Show($"Transición ({origin},{symbol})={destination} no agregada!\nRevisar valores ingresados");
-                ShowTextinLog($"Transición: ({origin},{symbol})={destination} no agregada!");
+                ShowTextinLog($"Transition: ({origin},{symbol})={destination} was not added!");
             }
 
         }
@@ -217,7 +218,7 @@ namespace Automaton
 
 
             foreach (var transition in transitions)
-            {                
+            {
                 // Verificar si hay más de un destino para la misma transición
                 if (transition.Value.Count != 1)
                 {
@@ -226,8 +227,8 @@ namespace Automaton
                 }
             }
             // Si no hay transiciones duplicadas, es DFA
-            
-            
+
+
             // Referencia a los simbolos del automata
             var symbols = (List<string>)dict["symbols"];
             // Referencia a los estados del automata
@@ -235,11 +236,11 @@ namespace Automaton
 
             // Recorrer cada estado y guardar los simbolos de transiciones
             // 
-            
+
             foreach (var state in states)
             {
                 // Conjunto para los símbolos vistos
-                var seenSymbols = new HashSet<string>(); 
+                var seenSymbols = new HashSet<string>();
 
                 // Recorrer las transiciones
                 foreach (var transition in transitions)
@@ -263,7 +264,7 @@ namespace Automaton
 
 
         // Convert NFA to DFA function
-       
+
 
 
         // Show automaton data
@@ -276,7 +277,7 @@ namespace Automaton
                 sb.AppendLine($"{item.Key}: {ValueConverter(item.Value)}");
             }
 
-            MessageBox.Show(sb.ToString(), "Contenido del automata");
+            MessageBox.Show(sb.ToString(), "Contents of the automaton");
         }
 
         private static string ValueConverter(object value)
@@ -306,7 +307,7 @@ namespace Automaton
                 pictureBox1.Image = null;
                 pictureBox1.Update();
             }
-            
+
             //Referencias a cada llave del diccionarion
             var dictSymbols = (List<string>)dict["symbols"];
             var dictStates = (List<string>)dict["states"];
@@ -318,7 +319,7 @@ namespace Automaton
             {
                 File.Delete("automato.dot");
             }
-            
+
 
             if (File.Exists("automato.png"))
             {
@@ -331,7 +332,7 @@ namespace Automaton
             dictInitialState.Clear();
             dictAcceptanceStates.Clear();
             dictTransitions.Clear();
-            ShowTextinLog("Se borraron los datos del automata.");
+            ShowTextinLog("The data on the automaton has been erased.");
         }
 
 
@@ -345,7 +346,7 @@ namespace Automaton
                 pictureBox1.Image = null;
                 pictureBox1.Update();
             }
-            
+
             if (File.Exists("automato.png"))
             {
                 File.Delete("automato.png");
@@ -365,16 +366,16 @@ namespace Automaton
             {
                 writer.WriteLine("digraph G {");
                 // La siguiente línea es para que el diagrama sea horizontal
-		        //writer.WriteLine("rankdir=LR;");
+                //writer.WriteLine("rankdir=LR;");
                 if (initialState.Count == 1)
                 {
                     writer.WriteLine(" Inicio [shape=none];");
                 }
-                
+
 
                 foreach (var item in (List<string>)dict["states"])
                 {
-                    string shape = acceptanceStatesList.Contains(item) ? "doublecircle": "circle";
+                    string shape = acceptanceStatesList.Contains(item) ? "doublecircle" : "circle";
 
                     writer.WriteLine($" {item} [shape={shape}];");
                 }
@@ -385,15 +386,15 @@ namespace Automaton
                 }
                 else
                 {
-                    MessageBox.Show("Automata sin suficientes datos para graficar.");
-                    ShowTextinLog("Faltan datos. Se debe indicar cual es el estado inicial.");
+                    MessageBox.Show("Automata without enough data to graph.");
+                    ShowTextinLog("Data is missing. The initial state must be indicated.");
                 }
 
                 foreach (var transition in transitions)
                 {
                     foreach (var item in transition.Value)
                     {
-                        writer.WriteLine($" {transition.Key.state} -> {item} [label = \"{transition.Key.symbol}\"];");                    
+                        writer.WriteLine($" {transition.Key.state} -> {item} [label = \"{transition.Key.symbol}\"];");
                     }
                 }
                 writer.WriteLine("}");
@@ -404,11 +405,11 @@ namespace Automaton
             {
                 if (isNFA(dict))
                 {
-                    MessageBox.Show("El automata es Finito NO Determinista (NFA)");
+                    MessageBox.Show("The automaton is Finite NOT Deterministic (NFA)");
                 }
                 else
                 {
-                    MessageBox.Show("El automata es Finito Determinista (DFA)");
+                    MessageBox.Show("The automaton is Finite Deterministic (DFA)");
                 }
             }
 
@@ -435,7 +436,7 @@ namespace Automaton
             if (!System.IO.File.Exists(graphvizPath))
             {
                 //MessageBox.Show($"El archivo dot.exe no se encuentra en la ruta: {graphvizPath}");
-                ShowTextinLog($"El archivo dot.exe no se encuentra en la ruta: {graphvizPath}");
+                ShowTextinLog($"The dot.exe file is not located in the path: {graphvizPath}");
             }
 
             using (Process process = Process.Start(processStartInfo))
@@ -457,7 +458,7 @@ namespace Automaton
                 }
                 else
                 {
-                    MessageBox.Show("Error, no se encontró imagen");
+                    MessageBox.Show("Error, the image was not found.");
                 }
             }
 
@@ -474,14 +475,17 @@ namespace Automaton
             automaton = new Dictionary<string, object>
             {
                 {"symbols", new List<string> { "1", "0" }},
-                {"states", new List<string> { "a", "b", "c" }},
+                {"states", new List<string> { "a", "b", "c", "d", "e" }},
                 {"initialState", new List<string> { "a" } },
-                {"acceptanceStates", new List<string> { "b" }},
+                {"acceptanceStates", new List<string> { "e" }},
                 {"transitions", new Dictionary<(string state, string symbol), List<string>>
                     {
-                        { ("a", "0"), new List<string>{"b", "c"} },
-                        { ("c", "0"), new List<string>{"a"} },
-                        { ("c", "1"), new List<string>{"b" } }
+                        { ("a", "0"), new List<string>{"b"} },
+                        { ("b", "0"), new List<string>{"c"} },
+                        { ("c", "0"), new List<string>{"c"} },
+                        { ("c", "1"), new List<string>{"c", "d" } },
+                        { ("d", "1"), new List<string>{"e" } }
+
                     }
                 }
             };
@@ -502,8 +506,185 @@ namespace Automaton
 
         private void btnGraph_Click(object sender, EventArgs e)
         {
-            
+            if (isNFA(automaton))
+            {
+                ConvertToDeterministic(automaton);
+            }
             GraphicAutomaton(automaton);
+        }
+
+        private void ConvertToDeterministic(Dictionary<string, object> dict)
+        {
+            // Referencia a las transiciones {Key=(state, symbol): Value}
+            var transitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
+            var states = (List<string>)dict["states"];
+            var symbols = (List<string>)dict["symbols"];
+            var newTransitions = new Dictionary<(string state, string symbol), List<string>>();
+            var newAcceptanceStateList = new List<string>();
+
+            CreateInitialTransition(dict, transitions, newTransitions, symbols);
+
+            //Empezar a partir de los demas estados, rellenar transiciones
+
+            while (newTransitions.Any(tr => tr.Value == null || tr.Value.Count == 0))
+            {
+                foreach (var tr in newTransitions.ToList())
+                {
+                    //Si la transición no tiene destino, buscar si existe en la transición vieja para asignarle el estado
+                    if (tr.Value == null || tr.Value.Count == 0)
+                    {
+                        AddDestination(dict, newAcceptanceStateList,newTransitions, transitions, tr, symbols);
+                    }
+                    var newTr = newTransitions[tr.Key];
+
+                    //Crear siguientes transiciones
+                    CreateTransitionByDestination(newTransitions, symbols, newTr);
+
+                }
+
+            }
+            List<string> newStates = newTransitions
+             .Select(t => t.Key.state)
+             .Distinct() // Elimina duplicados
+             .ToList();
+            automaton["states"] = newStates;
+            automaton["acceptanceStates"] = newAcceptanceStateList;
+            automaton["transitions"] = newTransitions;
+
+        }
+
+        private void AddDestination(Dictionary<string, object> dict, List<string> newAcceptanceStatesList, Dictionary<(string state, string symbol), List<string>> newTransitions, Dictionary<(string state, string symbol), List<string>> transitions, KeyValuePair<(string state, string symbol), List<string>> tr, List<string> symbols)
+        {
+            if (tr.Key.state.Count() > 1 && tr.Key.state != "Error")
+            {
+                var states = new List<string>();
+                var valuesCompleted = new List<string>();
+                foreach (var state in tr.Key.state)
+                {
+                    states.Add(state.ToString());
+                }
+
+                //Hay que buscar por cada estado, su destino
+                foreach (var item in states)
+                {
+                    var symbol = tr.Key.symbol;
+                    var values = transitions.Where(x => x.Key == (item, symbol)).SelectMany(x => x.Value).ToList();
+                    foreach (var item1 in values)
+                    {
+                        valuesCompleted.Add(item1);
+
+                    }
+                }
+
+                if (valuesCompleted.Count > 1)
+                {
+                    var concatenatedValues = string.Join("", valuesCompleted);
+                    newTransitions[tr.Key] = new List<string> { concatenatedValues };
+                    //Validar si el estado asignado coincide con el o los estados viejos para reasignar
+                    ValidateAcceptanceState(dict, valuesCompleted, tr.Key.state, newAcceptanceStatesList);
+
+                }
+                else if (valuesCompleted.Count == 1)
+                {
+                    newTransitions[tr.Key] = valuesCompleted;
+                    ValidateAcceptanceState(dict, valuesCompleted, tr.Key.state, newAcceptanceStatesList);
+
+                }
+                else
+                {
+                    newTransitions[tr.Key] = new List<string> { "Error" };
+                }
+
+            }
+            else
+            {
+                if (transitions.Keys.Contains(tr.Key))
+                {
+                    var values = transitions.Where(x => x.Key == tr.Key).SelectMany(x => x.Value).ToList();
+                    if (values.Count > 1)
+                    {
+                        var concatenatedValues = string.Join("", values);
+                        newTransitions[tr.Key] = new List<string> { concatenatedValues };
+                        ValidateAcceptanceState(dict, values, tr.Key.state, newAcceptanceStatesList);
+
+                    }
+                    else
+                    {
+                        newTransitions[tr.Key] = values;
+                        ValidateAcceptanceState(dict, values, tr.Key.state, newAcceptanceStatesList);
+
+                    }
+                }
+                else
+                {
+                    //Si no hay estado que coincida con la key, añadir error como destino
+                    newTransitions[tr.Key] = new List<string> { "Error" };
+                }
+            }
+        }
+
+        private void ValidateAcceptanceState(Dictionary<string, object> dict, List<string> values, string symbol, List<string> newAcceptanceStatesList)
+        {
+            var oldAcceptanceStateList = (List<string>)dict["acceptanceStates"];
+            if (values.Any(numero => oldAcceptanceStateList.Contains(numero)))
+            {
+                var concatenatedValues = string.Join("", values);
+                newAcceptanceStatesList.Add(concatenatedValues);
+            }
+            else if (oldAcceptanceStateList.Contains(symbol))
+            {
+                newAcceptanceStatesList.Add(symbol);
+            }
+        }
+        private void CreateTransitionByDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols, List<string> tr)
+        {
+            if (tr != null)
+            {
+                foreach (var destination in tr)
+                {
+                    foreach (var symbol in symbols)
+                    {
+                        if (!newTransitions.Keys.Contains((destination, symbol)))
+                        {
+                            newTransitions.Add((destination, symbol), new List<string>());
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CreateInitialTransition(Dictionary<string, object> dict, Dictionary<(string state, string symbol), List<string>> transitions, Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols)
+        {
+            var initialState = (List<string>)dict["initialState"];
+            var keys = transitions.Keys.Select(x => x.state).ToArray();
+            var initialStateTransitions = transitions.Where(x => x.Key.state == initialState[0]);
+            foreach (var tr in initialStateTransitions)
+            {
+                if (tr.Key.state != null && tr.Key.symbol != null)
+                {
+                    newTransitions.Add(tr.Key, tr.Value);
+
+                }
+
+            }
+            if (initialStateTransitions.Count() != symbols.Count)
+            {
+                var symbolsInitialState = initialStateTransitions.Select(x => x.Key.symbol);
+                foreach (var symbol in symbols)
+                {
+                    if (!symbolsInitialState.Contains(symbol))
+                    {
+                        newTransitions.Add((initialState[0], symbol), new List<string>());
+                    }
+                }
+            }
+
+            foreach (var tr in initialStateTransitions)
+            {
+                //Por cada estado de destino, se crea una nueva transición que se llenará posteriormente
+                CreateTransitionByDestination(newTransitions, symbols, tr.Value);
+
+            }
         }
 
         private void btnAddInitialState_Click(object sender, EventArgs e)
