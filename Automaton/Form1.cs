@@ -520,6 +520,7 @@ namespace Automaton
             var states = (List<string>)dict["states"];
             var symbols = (List<string>)dict["symbols"];
             var newTransitions = new Dictionary<(string state, string symbol), List<string>>();
+            var newAcceptanceStateList = new List<string>();
 
             CreateInitialTransition(dict, transitions, newTransitions, symbols);
 
@@ -534,16 +535,23 @@ namespace Automaton
                     {
                         AddDestination(newTransitions, transitions, tr, symbols);
                     }
+                    var newTr = newTransitions[tr.Key];
+                    //var newVl = newTransitions.Values.ToList();
+                    //Validar si el estado asignado coincide con el o los estados viejos para reasignar
+                    ValidateAcceptanceState(dict, newTr, tr.Key.state, newAcceptanceStateList);
+
                     //Crear siguientes transiciones
-                    var updatedValue = newTransitions[tr.Key];
-                    CreateTransitionByDestination(newTransitions, symbols, updatedValue);
+                    CreateTransitionByDestination(newTransitions, symbols, newTr);
 
                 }
 
             }
-            List<string> newStates = newTransitions.Keys.SelectMany(x => x.state).Select(c => c.ToString()).ToList();
-
+            List<string> newStates = newTransitions
+             .Select(t => t.Key.state)
+             .Distinct() // Elimina duplicados
+             .ToList();
             automaton["states"] = newStates;
+            automaton["acceptanceStates"] = newAcceptanceStateList;
             automaton["transitions"] = newTransitions;
 
         }
@@ -607,7 +615,20 @@ namespace Automaton
                     newTransitions[tr.Key] = new List<string> { "Error" };
                 }
             }
+        }
 
+        private void ValidateAcceptanceState(Dictionary<string, object> dict, List<string> values, string symbol, List<string> newAcceptanceStatesList)
+        {
+            var oldAcceptanceStateList = (List<string>)dict["acceptanceStates"];
+            if (values.Any(numero => oldAcceptanceStateList.Contains(numero)))
+            {
+                var concatenatedValues = string.Join("", values);
+                newAcceptanceStatesList.Add(symbol);
+            }
+            else if (oldAcceptanceStateList.Contains(symbol))
+            {
+                newAcceptanceStatesList.Add(symbol);
+            }
         }
         private void CreateTransitionByDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols, List<string> tr)
         {
