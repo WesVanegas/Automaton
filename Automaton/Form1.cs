@@ -533,12 +533,9 @@ namespace Automaton
                     //Si la transición no tiene destino, buscar si existe en la transición vieja para asignarle el estado
                     if (tr.Value == null || tr.Value.Count == 0)
                     {
-                        AddDestination(newTransitions, transitions, tr, symbols);
+                        AddDestination(dict, newAcceptanceStateList,newTransitions, transitions, tr, symbols);
                     }
                     var newTr = newTransitions[tr.Key];
-                    //var newVl = newTransitions.Values.ToList();
-                    //Validar si el estado asignado coincide con el o los estados viejos para reasignar
-                    ValidateAcceptanceState(dict, newTr, tr.Key.state, newAcceptanceStateList);
 
                     //Crear siguientes transiciones
                     CreateTransitionByDestination(newTransitions, symbols, newTr);
@@ -556,7 +553,7 @@ namespace Automaton
 
         }
 
-        private void AddDestination(Dictionary<(string state, string symbol), List<string>> newTransitions, Dictionary<(string state, string symbol), List<string>> transitions, KeyValuePair<(string state, string symbol), List<string>> tr, List<string> symbols)
+        private void AddDestination(Dictionary<string, object> dict, List<string> newAcceptanceStatesList, Dictionary<(string state, string symbol), List<string>> newTransitions, Dictionary<(string state, string symbol), List<string>> transitions, KeyValuePair<(string state, string symbol), List<string>> tr, List<string> symbols)
         {
             if (tr.Key.state.Count() > 1 && tr.Key.state != "Error")
             {
@@ -583,10 +580,15 @@ namespace Automaton
                 {
                     var concatenatedValues = string.Join("", valuesCompleted);
                     newTransitions[tr.Key] = new List<string> { concatenatedValues };
+                    //Validar si el estado asignado coincide con el o los estados viejos para reasignar
+                    ValidateAcceptanceState(dict, valuesCompleted, tr.Key.state, newAcceptanceStatesList);
+
                 }
                 else if (valuesCompleted.Count == 1)
                 {
                     newTransitions[tr.Key] = valuesCompleted;
+                    ValidateAcceptanceState(dict, valuesCompleted, tr.Key.state, newAcceptanceStatesList);
+
                 }
                 else
                 {
@@ -603,10 +605,14 @@ namespace Automaton
                     {
                         var concatenatedValues = string.Join("", values);
                         newTransitions[tr.Key] = new List<string> { concatenatedValues };
+                        ValidateAcceptanceState(dict, values, tr.Key.state, newAcceptanceStatesList);
+
                     }
                     else
                     {
                         newTransitions[tr.Key] = values;
+                        ValidateAcceptanceState(dict, values, tr.Key.state, newAcceptanceStatesList);
+
                     }
                 }
                 else
