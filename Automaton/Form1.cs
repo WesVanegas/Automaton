@@ -629,7 +629,7 @@ namespace Automaton
             if (values.Any(numero => oldAcceptanceStateList.Contains(numero)))
             {
                 var concatenatedValues = string.Join("", values);
-                newAcceptanceStatesList.Add(symbol);
+                newAcceptanceStatesList.Add(concatenatedValues);
             }
             else if (oldAcceptanceStateList.Contains(symbol))
             {
