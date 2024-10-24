@@ -210,15 +210,30 @@ namespace Automaton
 
         }
 
+        private bool ValidateAutomatonContent(Dictionary<string, object> dict)
+        {
+            var dictAcceptanceStates = (List<string>)dict["acceptanceStates"];
+            var dictInitialState = (List<string>)dict["initialState"];
+            var dictSymbols = (List<string>)dict["symbols"];
+
+            if (dictAcceptanceStates.Count() != 0 && dictInitialState.Count != 0 && dictSymbols.Count() != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
 
         // Validate type of automaton function
         // Nondeterministic finite automaton (NFA)
         // Deterministic finite automaton (DFA)
 
-        static bool isNFA(Dictionary<string, object> dict)
+        static bool IsNFA(Dictionary<string, object> dict)
         {
             // Referencia a las transiciones {Key=(state, symbol): Value}
             var transitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
+            
 
 
             foreach (var transition in transitions)
@@ -355,6 +370,11 @@ namespace Automaton
             {
                 File.Delete("automato.png");
             }
+
+            if (File.Exists("automato.dot"))
+            {
+                File.Delete("automato.dot");
+            }
             // Crear archivo Dot
 
             // Referencia a los estados de aceptación
@@ -371,10 +391,9 @@ namespace Automaton
                 writer.WriteLine("digraph G {");
                 // La siguiente línea es para que el diagrama sea horizontal
                 //writer.WriteLine("rankdir=LR;");
-                if (initialState.Count == 1)
-                {
-                    writer.WriteLine(" Inicio [shape=none];");
-                }
+                
+                writer.WriteLine(" Inicio [shape=none];");
+                
 
 
                 foreach (var item in (List<string>)dict["states"])
@@ -384,15 +403,9 @@ namespace Automaton
                     writer.WriteLine($" {item} [shape={shape}];");
                 }
                 //var initial = initialState.Count()==0 ? "empty" : $"{initialState[0]}";
-                if (initialState.Count() != 0)
-                {
-                    writer.WriteLine($" Inicio -> {initialState[0]};");
-                }
-                else
-                {
-                    MessageBox.Show("Automata without enough data to graph.");
-                    ShowTextinLog("Data is missing. The initial state must be indicated.");
-                }
+                
+                writer.WriteLine($" Inicio -> {initialState[0]};");
+                
 
                 foreach (var transition in transitions)
                 {
@@ -448,6 +461,7 @@ namespace Automaton
                     // Mostrar imagen en el pictureBox
                     pictureBox1.Image = Image.FromFile("automato.png");
                     //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                    ShowTextinLog("Automaton was graphed");
                 }
                 else
                 {
@@ -469,7 +483,7 @@ namespace Automaton
             {
                 {"symbols", new List<string> { "1", "0" }},
                 {"states", new List<string> { "a", "b", "c", "d", "e" }},
-                {"initialState", new List<string> { "a" } },
+                {"initialState", new List<string> {  } },
                 {"acceptanceStates", new List<string> { "e" }},
                 {"transitions", new Dictionary<(string state, string symbol), List<string>>
                     {
@@ -500,18 +514,26 @@ namespace Automaton
 
         private void btnGraph_Click(object sender, EventArgs e)
         {
-            if (isNFA(automaton))
+            if (ValidateAutomatonContent(automaton))
             {
-                MessageBox.Show("The introduced automaton is Finite NOT Deterministic (NFA)");
-                ConvertToDeterministic(automaton);
-                ShowTextinLog("Automaton was converted to Finite Deterministic (DFA)");
+                if (IsNFA(automaton))
+                {
+                    MessageBox.Show("The introduced automaton is Finite NOT Deterministic (NFA)");
+                    ConvertToDeterministic(automaton);
+                    ShowTextinLog("Automaton was converted to Finite Deterministic (DFA)");
+
+                }
+                else
+                {
+                    MessageBox.Show("The introduced automaton is Finite Deterministic (DFA)");
+                }
+                GraphicAutomaton(automaton);
             }
             else
             {
-                MessageBox.Show("The introduced automaton is Finite Deterministic (DFA)");
-            }
-            GraphicAutomaton(automaton);
-            ShowTextinLog("Automaton was graphed");
+                MessageBox.Show("Automaton without enough data to graph");
+                ShowTextinLog("Data is missing, automaton was no graphed.");
+            }   
   
         }
 
@@ -732,7 +754,8 @@ namespace Automaton
         private void btnViewAutomaton_Click(object sender, EventArgs e)
         {
             ShowAutomaton(automaton);
-            if (isNFA(automaton))
+            /*
+            if (IsNFA(automaton))
             {
                 ShowTextinLog("Automaton is Finite NOT Deterministic (NFA)");
             }
@@ -740,6 +763,7 @@ namespace Automaton
             {
                 ShowTextinLog("Automaton is Finite Deterministic (DFA)");
             }
+             */
         }
 
         private void Form1_Load(object sender, EventArgs e)
