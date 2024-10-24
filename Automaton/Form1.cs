@@ -499,12 +499,14 @@ namespace Automaton
         {
             string symbols = txtSymbols.Text;
             AddSymbols(automaton, symbols);
+            txtSymbols.Clear();
         }
 
         private void btnAddStates_Click(object sender, EventArgs e)
         {
             string states = txtStates.Text;
             AddStates(automaton, states);
+            txtStates.Clear();
         }
 
         private void btnGraph_Click(object sender, EventArgs e)
@@ -695,12 +697,14 @@ namespace Automaton
         {
             string initialState = txtInitialState.Text;
             AddInitialState(automaton, initialState);
+            txtInitialState.Clear();
         }
 
         private void btnAcceptanceStates_Click(object sender, EventArgs e)
         {
             string acceptanceStates = txtAcceptanceStates.Text;
             AddAcceptanceStates(automaton, acceptanceStates);
+            txtAcceptanceStates.Clear();
         }
 
         private void btnAddTransition_Click(object sender, EventArgs e)
@@ -710,6 +714,9 @@ namespace Automaton
             string destination = cboDestination.Text;
 
             AddTransitions(automaton, origin, symbol, destination);
+            cboDestination.Text = "";
+            cboOrigin.Text = "";
+            cboSymbol.Text = "";
         }
 
         private void btnClean_Click(object sender, EventArgs e)
