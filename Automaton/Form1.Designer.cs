@@ -69,7 +69,7 @@
             // txtSymbols
             // 
             this.txtSymbols.Location = new System.Drawing.Point(179, 31);
-            this.txtSymbols.MaxLength = 1;
+            this.txtSymbols.MaxLength = 100;
             this.txtSymbols.Name = "txtSymbols";
             this.txtSymbols.Size = new System.Drawing.Size(100, 20);
             this.txtSymbols.TabIndex = 1;
@@ -77,7 +77,7 @@
             // txtAcceptanceStates
             // 
             this.txtAcceptanceStates.Location = new System.Drawing.Point(179, 109);
-            this.txtAcceptanceStates.MaxLength = 1;
+            this.txtAcceptanceStates.MaxLength = 10;
             this.txtAcceptanceStates.Name = "txtAcceptanceStates";
             this.txtAcceptanceStates.Size = new System.Drawing.Size(100, 20);
             this.txtAcceptanceStates.TabIndex = 3;
@@ -103,7 +103,7 @@
             // txtStates
             // 
             this.txtStates.Location = new System.Drawing.Point(179, 57);
-            this.txtStates.MaxLength = 1;
+            this.txtStates.MaxLength = 100;
             this.txtStates.Name = "txtStates";
             this.txtStates.Size = new System.Drawing.Size(100, 20);
             this.txtStates.TabIndex = 3;
@@ -111,7 +111,7 @@
             // txtInitialState
             // 
             this.txtInitialState.Location = new System.Drawing.Point(179, 83);
-            this.txtInitialState.MaxLength = 1;
+            this.txtInitialState.MaxLength = 10;
             this.txtInitialState.Name = "txtInitialState";
             this.txtInitialState.Size = new System.Drawing.Size(100, 20);
             this.txtInitialState.TabIndex = 5;
@@ -145,16 +145,16 @@
             // 
             // txtOrigin
             // 
-            this.txtOrigin.Location = new System.Drawing.Point(51, 257);
-            this.txtOrigin.MaxLength = 1;
+            this.txtOrigin.Location = new System.Drawing.Point(66, 210);
+            this.txtOrigin.MaxLength = 10;
             this.txtOrigin.Name = "txtOrigin";
             this.txtOrigin.Size = new System.Drawing.Size(67, 20);
             this.txtOrigin.TabIndex = 8;
             // 
             // txtSymbol
             // 
-            this.txtSymbol.Location = new System.Drawing.Point(179, 257);
-            this.txtSymbol.MaxLength = 1;
+            this.txtSymbol.Location = new System.Drawing.Point(182, 210);
+            this.txtSymbol.MaxLength = 10;
             this.txtSymbol.Name = "txtSymbol";
             this.txtSymbol.Size = new System.Drawing.Size(67, 20);
             this.txtSymbol.TabIndex = 10;
@@ -170,8 +170,8 @@
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(302, 257);
-            this.txtDestination.MaxLength = 1;
+            this.txtDestination.Location = new System.Drawing.Point(302, 210);
+            this.txtDestination.MaxLength = 10;
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(67, 20);
             this.txtDestination.TabIndex = 12;
@@ -187,7 +187,7 @@
             // 
             // btnAddTransition
             // 
-            this.btnAddTransition.Location = new System.Drawing.Point(159, 214);
+            this.btnAddTransition.Location = new System.Drawing.Point(159, 245);
             this.btnAddTransition.Name = "btnAddTransition";
             this.btnAddTransition.Size = new System.Drawing.Size(120, 23);
             this.btnAddTransition.TabIndex = 14;
