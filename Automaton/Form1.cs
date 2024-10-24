@@ -485,7 +485,6 @@ namespace Automaton
                         { ("c", "0"), new List<string>{"c"} },
                         { ("c", "1"), new List<string>{"c", "d" } },
                         { ("d", "1"), new List<string>{"e" } }
-
                     }
                 }
             };
@@ -533,7 +532,7 @@ namespace Automaton
                     //Si la transición no tiene destino, buscar si existe en la transición vieja para asignarle el estado
                     if (tr.Value == null || tr.Value.Count == 0)
                     {
-                        AddDestination(dict, newAcceptanceStateList,newTransitions, transitions, tr, symbols);
+                        AddDestination(dict, newAcceptanceStateList, newTransitions, transitions, tr, symbols);
                     }
                     var newTr = newTransitions[tr.Key];
 
@@ -640,14 +639,16 @@ namespace Automaton
         {
             if (tr != null)
             {
-                foreach (var destination in tr)
+                var destination = tr[0];
+                if (tr.Count() > 1)
                 {
-                    foreach (var symbol in symbols)
+                    destination = string.Join("", tr);
+                }
+                foreach (var symbol in symbols)
+                {
+                    if (!newTransitions.Keys.Contains((destination, symbol)))
                     {
-                        if (!newTransitions.Keys.Contains((destination, symbol)))
-                        {
-                            newTransitions.Add((destination, symbol), new List<string>());
-                        }
+                        newTransitions.Add((destination, symbol), new List<string>());
                     }
                 }
             }
@@ -662,7 +663,13 @@ namespace Automaton
             {
                 if (tr.Key.state != null && tr.Key.symbol != null)
                 {
-                    newTransitions.Add(tr.Key, tr.Value);
+                    var values = tr.Value[0];
+                    if (tr.Value.Count() > 1)
+                    {
+                        values = string.Join("", tr.Value);
+                    }
+                    var list = new List<string> { values };
+                    newTransitions.Add(tr.Key, list);
 
                 }
 
@@ -677,13 +684,6 @@ namespace Automaton
                         newTransitions.Add((initialState[0], symbol), new List<string>());
                     }
                 }
-            }
-
-            foreach (var tr in initialStateTransitions)
-            {
-                //Por cada estado de destino, se crea una nueva transición que se llenará posteriormente
-                CreateTransitionByDestination(newTransitions, symbols, tr.Value);
-
             }
         }
 
