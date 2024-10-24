@@ -144,7 +144,7 @@ namespace Automaton
                 {
                     dictAcceptanceStates.Add(state);
                     //MessageBox.Show($"Se agregó estado de aceptación {state}");
-                    ShowTextinLog($"Acceptance state added {state}");
+                    ShowTextinLog($"Acceptance state added: {state}");
                 }
                 else
                 {
@@ -405,17 +405,6 @@ namespace Automaton
             }
             //MessageBox.Show("Archivo Dot generado");
 
-            if (initialState.Count == 1)
-            {
-                if (isNFA(dict))
-                {
-                    MessageBox.Show("The automaton is Finite NOT Deterministic (NFA)");
-                }
-                else
-                {
-                    MessageBox.Show("The automaton is Finite Deterministic (DFA)");
-                }
-            }
 
             // Graficar con Graphviz usando el archivo Dot como referencia
 
@@ -513,9 +502,17 @@ namespace Automaton
         {
             if (isNFA(automaton))
             {
+                MessageBox.Show("The introduced automaton is Finite NOT Deterministic (NFA)");
                 ConvertToDeterministic(automaton);
+                ShowTextinLog("Automaton was converted to Finite Deterministic (DFA)");
+            }
+            else
+            {
+                MessageBox.Show("The introduced automaton is Finite Deterministic (DFA)");
             }
             GraphicAutomaton(automaton);
+            ShowTextinLog("Automaton was graphed");
+  
         }
 
         private void ConvertToDeterministic(Dictionary<string, object> dict)
@@ -735,6 +732,14 @@ namespace Automaton
         private void btnViewAutomaton_Click(object sender, EventArgs e)
         {
             ShowAutomaton(automaton);
+            if (isNFA(automaton))
+            {
+                ShowTextinLog("Automaton is Finite NOT Deterministic (NFA)");
+            }
+            else
+            {
+                ShowTextinLog("Automaton is Finite Deterministic (DFA)");
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
