@@ -38,10 +38,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtOrigin = new System.Windows.Forms.TextBox();
-            this.txtSymbol = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtDestination = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.btnAddTransition = new System.Windows.Forms.Button();
             this.btnGraph = new System.Windows.Forms.Button();
@@ -54,6 +51,9 @@
             this.btnViewAutomaton = new System.Windows.Forms.Button();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.cboOrigin = new System.Windows.Forms.ComboBox();
+            this.cboSymbol = new System.Windows.Forms.ComboBox();
+            this.cboDestination = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -137,27 +137,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(99, 179);
+            this.label6.Location = new System.Drawing.Point(90, 179);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 7;
             this.label6.Text = "Origin";
-            // 
-            // txtOrigin
-            // 
-            this.txtOrigin.Location = new System.Drawing.Point(66, 210);
-            this.txtOrigin.MaxLength = 10;
-            this.txtOrigin.Name = "txtOrigin";
-            this.txtOrigin.Size = new System.Drawing.Size(67, 20);
-            this.txtOrigin.TabIndex = 8;
-            // 
-            // txtSymbol
-            // 
-            this.txtSymbol.Location = new System.Drawing.Point(182, 210);
-            this.txtSymbol.MaxLength = 10;
-            this.txtSymbol.Name = "txtSymbol";
-            this.txtSymbol.Size = new System.Drawing.Size(67, 20);
-            this.txtSymbol.TabIndex = 10;
             // 
             // label7
             // 
@@ -167,14 +151,6 @@
             this.label7.Size = new System.Drawing.Size(41, 13);
             this.label7.TabIndex = 9;
             this.label7.Text = "Symbol";
-            // 
-            // txtDestination
-            // 
-            this.txtDestination.Location = new System.Drawing.Point(302, 210);
-            this.txtDestination.MaxLength = 10;
-            this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(67, 20);
-            this.txtDestination.TabIndex = 12;
             // 
             // label8
             // 
@@ -187,7 +163,7 @@
             // 
             // btnAddTransition
             // 
-            this.btnAddTransition.Location = new System.Drawing.Point(159, 245);
+            this.btnAddTransition.Location = new System.Drawing.Point(159, 264);
             this.btnAddTransition.Name = "btnAddTransition";
             this.btnAddTransition.Size = new System.Drawing.Size(120, 23);
             this.btnAddTransition.TabIndex = 14;
@@ -297,12 +273,39 @@
             this.label9.TabIndex = 24;
             this.label9.Text = "Registro de eventos";
             // 
+            // cboOrigin
+            // 
+            this.cboOrigin.FormattingEnabled = true;
+            this.cboOrigin.Location = new System.Drawing.Point(66, 215);
+            this.cboOrigin.Name = "cboOrigin";
+            this.cboOrigin.Size = new System.Drawing.Size(67, 21);
+            this.cboOrigin.TabIndex = 25;
+            // 
+            // cboSymbol
+            // 
+            this.cboSymbol.FormattingEnabled = true;
+            this.cboSymbol.Location = new System.Drawing.Point(179, 215);
+            this.cboSymbol.Name = "cboSymbol";
+            this.cboSymbol.Size = new System.Drawing.Size(67, 21);
+            this.cboSymbol.TabIndex = 26;
+            // 
+            // cboDestination
+            // 
+            this.cboDestination.FormattingEnabled = true;
+            this.cboDestination.Location = new System.Drawing.Point(305, 215);
+            this.cboDestination.Name = "cboDestination";
+            this.cboDestination.Size = new System.Drawing.Size(67, 21);
+            this.cboDestination.TabIndex = 27;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.cboDestination);
+            this.Controls.Add(this.cboSymbol);
+            this.Controls.Add(this.cboOrigin);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.btnViewAutomaton);
@@ -314,11 +317,8 @@
             this.Controls.Add(this.btnClean);
             this.Controls.Add(this.btnGraph);
             this.Controls.Add(this.btnAddTransition);
-            this.Controls.Add(this.txtDestination);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtSymbol);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.txtOrigin);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtInitialState);
@@ -332,6 +332,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Automaton";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -350,10 +351,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtOrigin;
-        private System.Windows.Forms.TextBox txtSymbol;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtDestination;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnAddTransition;
         private System.Windows.Forms.Button btnGraph;
@@ -366,6 +364,9 @@
         private System.Windows.Forms.Button btnViewAutomaton;
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cboOrigin;
+        private System.Windows.Forms.ComboBox cboSymbol;
+        private System.Windows.Forms.ComboBox cboDestination;
     }
 }
 

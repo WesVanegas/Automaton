@@ -48,6 +48,7 @@ namespace Automaton
                 {
                     // Si no existe, se agrega al automata
                     dictSymbols.Add(symbol);
+                    cboSymbol.Items.Add(symbol);
                     //MessageBox.Show($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
                     ShowTextinLog($"Symbol added: {symbol}");
                     ShowTextinLog($"Symbols: {string.Join(", ", (List<string>)dict["symbols"])}");
@@ -74,6 +75,8 @@ namespace Automaton
                 {
                     // Si no existe, se agrega al automata
                     dictStates.Add(state);
+                    cboOrigin.Items.Add(state);
+                    cboDestination.Items.Add(state);
                     //MessageBox.Show($"Estados: {string.Join(", ", (List<string>)dict["states"])}");
                     ShowTextinLog($"State was added: {state}");
                     ShowTextinLog($"States: {string.Join(", ", (List<string>)dict["states"])}");
@@ -100,6 +103,7 @@ namespace Automaton
                 {
                     // Agregar estado inicial
                     dictInitialState.Add(state);
+                    ShowTextinLog($"Initial state was added: {state}");
 
                     // Poner en primera posición el estado inical para facilitar la grafica
                     //MessageBox.Show($"Before State: {string.Join(",", dictStates)}");
@@ -701,9 +705,9 @@ namespace Automaton
 
         private void btnAddTransition_Click(object sender, EventArgs e)
         {
-            string origin = txtOrigin.Text;
-            string symbol = txtSymbol.Text;
-            string destination = txtDestination.Text;
+            string origin = cboOrigin.Text;
+            string symbol = cboSymbol.Text;
+            string destination = cboDestination.Text;
 
             AddTransitions(automaton, origin, symbol, destination);
         }
@@ -715,15 +719,31 @@ namespace Automaton
             txtStates.Clear();
             txtInitialState.Clear();
             txtAcceptanceStates.Clear();
-            txtOrigin.Clear();
-            txtSymbol.Clear();
-            txtDestination.Clear();
+            cboOrigin.Items.Clear();
+            cboSymbol.Items.Clear();
+            cboDestination.Items.Clear();
             CleanAutomaton(automaton);
         }
 
         private void btnViewAutomaton_Click(object sender, EventArgs e)
         {
             ShowAutomaton(automaton);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+
+            foreach (var state in (List<string>)automaton["states"])
+            {
+                cboOrigin.Items.Add(state);
+                cboDestination.Items.Add(state);
+            }
+
+            foreach (var symbol in (List<string>)automaton["symbols"])
+            {
+                cboSymbol.Items.Add(symbol);
+            }
         }
     }
 }
