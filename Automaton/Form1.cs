@@ -233,7 +233,7 @@ namespace Automaton
         {
             // Referencia a las transiciones {Key=(state, symbol): Value}
             var transitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
-            
+
 
 
             foreach (var transition in transitions)
@@ -391,9 +391,9 @@ namespace Automaton
                 writer.WriteLine("digraph G {");
                 // La siguiente línea es para que el diagrama sea horizontal
                 //writer.WriteLine("rankdir=LR;");
-                
+
                 writer.WriteLine(" Inicio [shape=none];");
-                
+
 
 
                 foreach (var item in (List<string>)dict["states"])
@@ -403,9 +403,9 @@ namespace Automaton
                     writer.WriteLine($" {item} [shape={shape}];");
                 }
                 //var initial = initialState.Count()==0 ? "empty" : $"{initialState[0]}";
-                
+
                 writer.WriteLine($" Inicio -> {initialState[0]};");
-                
+
 
                 foreach (var transition in transitions)
                 {
@@ -482,16 +482,16 @@ namespace Automaton
             automaton = new Dictionary<string, object>
             {
                 {"symbols", new List<string> { "1", "0" }},
-                {"states", new List<string> { "a", "b", "c", "d", "e" }},
-                {"initialState", new List<string> {  } },
-                {"acceptanceStates", new List<string> { "e" }},
+                {"states", new List<string> { "a", "b", "c"}},
+                {"initialState", new List<string> { "a" } },
+                {"acceptanceStates", new List<string> { "b" }},
                 {"transitions", new Dictionary<(string state, string symbol), List<string>>
                     {
-                        { ("a", "0"), new List<string>{"b"} },
-                        { ("b", "0"), new List<string>{"c"} },
-                        { ("c", "0"), new List<string>{"c"} },
-                        { ("c", "1"), new List<string>{"c", "d" } },
-                        { ("d", "1"), new List<string>{"e" } }
+                       { ("a", "1"), new List<string>{"b"} },
+                        { ("b", "0"), new List<string>{"a", "b"} },
+                        { ("b", "1"), new List<string>{"c"} },
+                        { ("c", "0"), new List<string>{"a"} },
+                        { ("c", "1"), new List<string>{"b"} },
                     }
                 }
             };
@@ -533,8 +533,8 @@ namespace Automaton
             {
                 MessageBox.Show("Automaton without enough data to graph");
                 ShowTextinLog("Data is missing, automaton was no graphed.");
-            }   
-  
+            }
+
         }
 
         private void ConvertToDeterministic(Dictionary<string, object> dict)
@@ -563,7 +563,6 @@ namespace Automaton
 
                     //Crear siguientes transiciones
                     CreateTransitionByDestination(newTransitions, symbols, newTr);
-
                 }
 
             }
@@ -592,7 +591,7 @@ namespace Automaton
                 foreach (var item in states)
                 {
                     var symbol = tr.Key.symbol;
-                    var values = transitions.Where(x => x.Key == (item, symbol)).SelectMany(x => x.Value).ToList();
+                    var values = transitions.Where(x => x.Key == (item, symbol)).SelectMany(x => x.Value).Distinct().ToList();
                     foreach (var item1 in values)
                     {
                         valuesCompleted.Add(item1);
@@ -600,6 +599,8 @@ namespace Automaton
                     }
                 }
 
+                valuesCompleted = valuesCompleted.Distinct().ToList();
+                valuesCompleted.Sort(StringComparer.Ordinal);
                 if (valuesCompleted.Count > 1)
                 {
                     var concatenatedValues = string.Join("", valuesCompleted);
@@ -624,7 +625,8 @@ namespace Automaton
             {
                 if (transitions.Keys.Contains(tr.Key))
                 {
-                    var values = transitions.Where(x => x.Key == tr.Key).SelectMany(x => x.Value).ToList();
+                    var values = transitions.Where(x => x.Key == tr.Key).SelectMany(x => x.Value).Distinct().ToList();
+                    values.Sort(StringComparer.Ordinal);
                     if (values.Count > 1)
                     {
                         var concatenatedValues = string.Join("", values);
@@ -697,8 +699,8 @@ namespace Automaton
                     newTransitions.Add(tr.Key, list);
 
                 }
-
             }
+
             if (initialStateTransitions.Count() != symbols.Count)
             {
                 var symbolsInitialState = initialStateTransitions.Select(x => x.Key.symbol);
@@ -768,7 +770,7 @@ namespace Automaton
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
 
             foreach (var state in (List<string>)automaton["states"])
             {
