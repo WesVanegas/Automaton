@@ -488,6 +488,7 @@ namespace Automaton
                 {"transitions", new Dictionary<(string state, string symbol), List<string>>
                     {
                        { ("a", "1"), new List<string>{"b"} },
+                       //{ ("a", "0"), new List<string>{"b"} },
                         { ("b", "0"), new List<string>{"a", "b"} },
                         { ("b", "1"), new List<string>{"c"} },
                         { ("c", "0"), new List<string>{"a"} },
@@ -546,7 +547,7 @@ namespace Automaton
             var newTransitions = new Dictionary<(string state, string symbol), List<string>>();
             var newAcceptanceStateList = new List<string>();
 
-            CreateInitialTransition(dict, transitions, newTransitions, symbols);
+            CreateInitialTransition(dict, transitions, newTransitions);
 
             //Empezar a partir de los demas estados, rellenar transiciones
 
@@ -681,7 +682,7 @@ namespace Automaton
             }
         }
 
-        private void CreateInitialTransition(Dictionary<string, object> dict, Dictionary<(string state, string symbol), List<string>> transitions, Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols)
+        private void CreateInitialTransition(Dictionary<string, object> dict, Dictionary<(string state, string symbol), List<string>> transitions, Dictionary<(string state, string symbol), List<string>> newTransitions)
         {
             var initialState = (List<string>)dict["initialState"];
             var keys = transitions.Keys.Select(x => x.state).ToArray();
@@ -690,28 +691,10 @@ namespace Automaton
             {
                 if (tr.Key.state != null && tr.Key.symbol != null)
                 {
-                    var values = tr.Value[0];
-                    if (tr.Value.Count() > 1)
-                    {
-                        values = string.Join("", tr.Value);
-                    }
-                    var list = new List<string> { values };
-                    newTransitions.Add(tr.Key, list);
-
+                    newTransitions.Add(tr.Key, new List<string>());
                 }
             }
 
-            if (initialStateTransitions.Count() != symbols.Count)
-            {
-                var symbolsInitialState = initialStateTransitions.Select(x => x.Key.symbol);
-                foreach (var symbol in symbols)
-                {
-                    if (!symbolsInitialState.Contains(symbol))
-                    {
-                        newTransitions.Add((initialState[0], symbol), new List<string>());
-                    }
-                }
-            }
         }
 
         private void btnAddInitialState_Click(object sender, EventArgs e)
