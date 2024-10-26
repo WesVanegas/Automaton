@@ -533,6 +533,7 @@ namespace Automaton
                 }
                 GraphicAutomaton(automaton);
 
+                btnModify.Enabled = true;
                 btnGraph.Enabled = false;
                 btnAddTransition.Enabled = false;
                 btnAddStates.Enabled = false;
@@ -747,6 +748,16 @@ namespace Automaton
             cboOrigin.Items.Clear();
             cboSymbol.Items.Clear();
             cboDestination.Items.Clear();
+            btnGraph.Enabled = true;
+            btnAddTransition.Enabled = true;
+            btnAddStates.Enabled = true;
+            btnAddsymbols.Enabled = true;
+            btnAddInitialState.Enabled = true;
+            btnAcceptanceStates.Enabled = true;
+            btnRemoveAcceptanceStates.Enabled = true;
+            btnRemoveStates.Enabled = true;
+            btnRemoveSymbols.Enabled = true;
+            btnRemoveInitialState.Enabled = true;
             CleanAutomaton(automaton);
         }
 
