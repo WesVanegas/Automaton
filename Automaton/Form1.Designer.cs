@@ -54,6 +54,12 @@
             this.cboOrigin = new System.Windows.Forms.ComboBox();
             this.cboSymbol = new System.Windows.Forms.ComboBox();
             this.cboDestination = new System.Windows.Forms.ComboBox();
+            this.btnModify = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnRemoveSymbols = new System.Windows.Forms.Button();
+            this.btnRemoveStates = new System.Windows.Forms.Button();
+            this.btnRemoveInitialState = new System.Windows.Forms.Button();
+            this.btnRemoveAcceptanceStates = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +74,7 @@
             // 
             // txtSymbols
             // 
-            this.txtSymbols.Location = new System.Drawing.Point(179, 31);
+            this.txtSymbols.Location = new System.Drawing.Point(142, 35);
             this.txtSymbols.MaxLength = 100;
             this.txtSymbols.Name = "txtSymbols";
             this.txtSymbols.Size = new System.Drawing.Size(100, 20);
@@ -76,10 +82,10 @@
             // 
             // txtAcceptanceStates
             // 
-            this.txtAcceptanceStates.Location = new System.Drawing.Point(179, 109);
+            this.txtAcceptanceStates.Location = new System.Drawing.Point(163, 114);
             this.txtAcceptanceStates.MaxLength = 10;
             this.txtAcceptanceStates.Name = "txtAcceptanceStates";
-            this.txtAcceptanceStates.Size = new System.Drawing.Size(100, 20);
+            this.txtAcceptanceStates.Size = new System.Drawing.Size(79, 20);
             this.txtAcceptanceStates.TabIndex = 3;
             // 
             // label2
@@ -102,7 +108,7 @@
             // 
             // txtStates
             // 
-            this.txtStates.Location = new System.Drawing.Point(179, 57);
+            this.txtStates.Location = new System.Drawing.Point(142, 61);
             this.txtStates.MaxLength = 100;
             this.txtStates.Name = "txtStates";
             this.txtStates.Size = new System.Drawing.Size(100, 20);
@@ -110,7 +116,7 @@
             // 
             // txtInitialState
             // 
-            this.txtInitialState.Location = new System.Drawing.Point(179, 83);
+            this.txtInitialState.Location = new System.Drawing.Point(142, 88);
             this.txtInitialState.MaxLength = 10;
             this.txtInitialState.Name = "txtInitialState";
             this.txtInitialState.Size = new System.Drawing.Size(100, 20);
@@ -121,9 +127,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(48, 91);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 13);
+            this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Inicial State";
+            this.label4.Text = "Initial state";
             // 
             // label5
             // 
@@ -146,7 +152,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(196, 179);
+            this.label7.Location = new System.Drawing.Point(201, 179);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 13);
             this.label7.TabIndex = 9;
@@ -155,7 +161,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(308, 179);
+            this.label8.Location = new System.Drawing.Point(291, 179);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(60, 13);
             this.label8.TabIndex = 11;
@@ -163,9 +169,9 @@
             // 
             // btnAddTransition
             // 
-            this.btnAddTransition.Location = new System.Drawing.Point(159, 264);
+            this.btnAddTransition.Location = new System.Drawing.Point(164, 242);
             this.btnAddTransition.Name = "btnAddTransition";
-            this.btnAddTransition.Size = new System.Drawing.Size(120, 23);
+            this.btnAddTransition.Size = new System.Drawing.Size(100, 25);
             this.btnAddTransition.TabIndex = 14;
             this.btnAddTransition.Text = "Add Transition";
             this.btnAddTransition.UseVisualStyleBackColor = true;
@@ -173,21 +179,21 @@
             // 
             // btnGraph
             // 
-            this.btnGraph.Location = new System.Drawing.Point(182, 321);
+            this.btnGraph.Location = new System.Drawing.Point(164, 321);
             this.btnGraph.Name = "btnGraph";
-            this.btnGraph.Size = new System.Drawing.Size(75, 23);
+            this.btnGraph.Size = new System.Drawing.Size(100, 25);
             this.btnGraph.TabIndex = 15;
-            this.btnGraph.Text = "Graficar";
+            this.btnGraph.Text = "Graph";
             this.btnGraph.UseVisualStyleBackColor = true;
             this.btnGraph.Click += new System.EventHandler(this.btnGraph_Click);
             // 
             // btnClean
             // 
-            this.btnClean.Location = new System.Drawing.Point(305, 321);
+            this.btnClean.Location = new System.Drawing.Point(269, 321);
             this.btnClean.Name = "btnClean";
-            this.btnClean.Size = new System.Drawing.Size(75, 23);
+            this.btnClean.Size = new System.Drawing.Size(100, 25);
             this.btnClean.TabIndex = 16;
-            this.btnClean.Text = "Limpiar";
+            this.btnClean.Text = "Clean automata";
             this.btnClean.UseVisualStyleBackColor = true;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
@@ -205,7 +211,7 @@
             // 
             // btnAddsymbols
             // 
-            this.btnAddsymbols.Location = new System.Drawing.Point(294, 29);
+            this.btnAddsymbols.Location = new System.Drawing.Point(248, 35);
             this.btnAddsymbols.Name = "btnAddsymbols";
             this.btnAddsymbols.Size = new System.Drawing.Size(75, 23);
             this.btnAddsymbols.TabIndex = 18;
@@ -215,7 +221,7 @@
             // 
             // btnAddStates
             // 
-            this.btnAddStates.Location = new System.Drawing.Point(294, 55);
+            this.btnAddStates.Location = new System.Drawing.Point(248, 61);
             this.btnAddStates.Name = "btnAddStates";
             this.btnAddStates.Size = new System.Drawing.Size(75, 23);
             this.btnAddStates.TabIndex = 19;
@@ -225,7 +231,7 @@
             // 
             // btnAddInitialState
             // 
-            this.btnAddInitialState.Location = new System.Drawing.Point(294, 81);
+            this.btnAddInitialState.Location = new System.Drawing.Point(248, 86);
             this.btnAddInitialState.Name = "btnAddInitialState";
             this.btnAddInitialState.Size = new System.Drawing.Size(75, 23);
             this.btnAddInitialState.TabIndex = 20;
@@ -235,7 +241,7 @@
             // 
             // btnAcceptanceStates
             // 
-            this.btnAcceptanceStates.Location = new System.Drawing.Point(294, 107);
+            this.btnAcceptanceStates.Location = new System.Drawing.Point(248, 114);
             this.btnAcceptanceStates.Name = "btnAcceptanceStates";
             this.btnAcceptanceStates.Size = new System.Drawing.Size(75, 23);
             this.btnAcceptanceStates.TabIndex = 21;
@@ -247,9 +253,9 @@
             // 
             this.btnViewAutomaton.Location = new System.Drawing.Point(58, 321);
             this.btnViewAutomaton.Name = "btnViewAutomaton";
-            this.btnViewAutomaton.Size = new System.Drawing.Size(75, 23);
+            this.btnViewAutomaton.Size = new System.Drawing.Size(100, 25);
             this.btnViewAutomaton.TabIndex = 22;
-            this.btnViewAutomaton.Text = "Ver automata";
+            this.btnViewAutomaton.Text = "Data";
             this.btnViewAutomaton.UseVisualStyleBackColor = true;
             this.btnViewAutomaton.Click += new System.EventHandler(this.btnViewAutomaton_Click);
             // 
@@ -261,7 +267,7 @@
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(322, 120);
+            this.txtLog.Size = new System.Drawing.Size(311, 120);
             this.txtLog.TabIndex = 23;
             // 
             // label9
@@ -269,33 +275,88 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(171, 373);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 13);
+            this.label9.Size = new System.Drawing.Size(0, 13);
             this.label9.TabIndex = 24;
-            this.label9.Text = "Registro de eventos";
             // 
             // cboOrigin
             // 
             this.cboOrigin.FormattingEnabled = true;
-            this.cboOrigin.Location = new System.Drawing.Point(66, 215);
+            this.cboOrigin.Location = new System.Drawing.Point(58, 215);
             this.cboOrigin.Name = "cboOrigin";
-            this.cboOrigin.Size = new System.Drawing.Size(67, 21);
+            this.cboOrigin.Size = new System.Drawing.Size(100, 21);
             this.cboOrigin.TabIndex = 25;
             // 
             // cboSymbol
             // 
             this.cboSymbol.FormattingEnabled = true;
-            this.cboSymbol.Location = new System.Drawing.Point(179, 215);
+            this.cboSymbol.Location = new System.Drawing.Point(164, 215);
             this.cboSymbol.Name = "cboSymbol";
-            this.cboSymbol.Size = new System.Drawing.Size(67, 21);
+            this.cboSymbol.Size = new System.Drawing.Size(100, 21);
             this.cboSymbol.TabIndex = 26;
             // 
             // cboDestination
             // 
             this.cboDestination.FormattingEnabled = true;
-            this.cboDestination.Location = new System.Drawing.Point(305, 215);
+            this.cboDestination.Location = new System.Drawing.Point(269, 215);
             this.cboDestination.Name = "cboDestination";
-            this.cboDestination.Size = new System.Drawing.Size(67, 21);
+            this.cboDestination.Size = new System.Drawing.Size(100, 21);
             this.cboDestination.TabIndex = 27;
+            // 
+            // btnModify
+            // 
+            this.btnModify.Location = new System.Drawing.Point(164, 352);
+            this.btnModify.Name = "btnModify";
+            this.btnModify.Size = new System.Drawing.Size(205, 25);
+            this.btnModify.TabIndex = 28;
+            this.btnModify.Text = "Modify initial automata";
+            this.btnModify.UseVisualStyleBackColor = true;
+            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(375, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(31, 23);
+            this.button2.TabIndex = 29;
+            this.button2.Text = "?";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnRemoveSymbols
+            // 
+            this.btnRemoveSymbols.Location = new System.Drawing.Point(329, 35);
+            this.btnRemoveSymbols.Name = "btnRemoveSymbols";
+            this.btnRemoveSymbols.Size = new System.Drawing.Size(77, 23);
+            this.btnRemoveSymbols.TabIndex = 30;
+            this.btnRemoveSymbols.Text = "Remove";
+            this.btnRemoveSymbols.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveStates
+            // 
+            this.btnRemoveStates.Location = new System.Drawing.Point(329, 61);
+            this.btnRemoveStates.Name = "btnRemoveStates";
+            this.btnRemoveStates.Size = new System.Drawing.Size(77, 23);
+            this.btnRemoveStates.TabIndex = 31;
+            this.btnRemoveStates.Text = "Remove";
+            this.btnRemoveStates.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveInitialState
+            // 
+            this.btnRemoveInitialState.Location = new System.Drawing.Point(329, 86);
+            this.btnRemoveInitialState.Name = "btnRemoveInitialState";
+            this.btnRemoveInitialState.Size = new System.Drawing.Size(77, 23);
+            this.btnRemoveInitialState.TabIndex = 32;
+            this.btnRemoveInitialState.Text = "Remove";
+            this.btnRemoveInitialState.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveAcceptanceStates
+            // 
+            this.btnRemoveAcceptanceStates.Location = new System.Drawing.Point(329, 114);
+            this.btnRemoveAcceptanceStates.Name = "btnRemoveAcceptanceStates";
+            this.btnRemoveAcceptanceStates.Size = new System.Drawing.Size(77, 23);
+            this.btnRemoveAcceptanceStates.TabIndex = 33;
+            this.btnRemoveAcceptanceStates.Text = "Remove";
+            this.btnRemoveAcceptanceStates.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -303,6 +364,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnRemoveAcceptanceStates);
+            this.Controls.Add(this.btnRemoveInitialState);
+            this.Controls.Add(this.btnRemoveStates);
+            this.Controls.Add(this.btnRemoveSymbols);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnModify);
             this.Controls.Add(this.cboDestination);
             this.Controls.Add(this.cboSymbol);
             this.Controls.Add(this.cboOrigin);
@@ -367,6 +434,12 @@
         private System.Windows.Forms.ComboBox cboOrigin;
         private System.Windows.Forms.ComboBox cboSymbol;
         private System.Windows.Forms.ComboBox cboDestination;
+        private System.Windows.Forms.Button btnModify;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnRemoveSymbols;
+        private System.Windows.Forms.Button btnRemoveStates;
+        private System.Windows.Forms.Button btnRemoveInitialState;
+        private System.Windows.Forms.Button btnRemoveAcceptanceStates;
     }
 }
 

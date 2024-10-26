@@ -475,6 +475,8 @@ namespace Automaton
 
 
         private Dictionary<string, object> automaton;
+        private Dictionary<string, object> automatonCopy;
+
         public Form1()
         {
             InitializeComponent();
@@ -517,6 +519,7 @@ namespace Automaton
         {
             if (ValidateAutomatonContent(automaton))
             {
+                automatonCopy = automaton;
                 if (IsNFA(automaton))
                 {
                     MessageBox.Show("The introduced automaton is Finite NOT Deterministic (NFA)");
@@ -529,6 +532,17 @@ namespace Automaton
                     MessageBox.Show("The introduced automaton is Finite Deterministic (DFA)");
                 }
                 GraphicAutomaton(automaton);
+
+                btnGraph.Enabled = false;
+                btnAddTransition.Enabled = false;
+                btnAddStates.Enabled = false;
+                btnAddsymbols.Enabled = false;
+                btnAddInitialState.Enabled = false;
+                btnAcceptanceStates.Enabled = false;
+                btnRemoveAcceptanceStates.Enabled = false;
+                btnRemoveStates.Enabled = false;
+                btnRemoveSymbols.Enabled = false;
+                btnRemoveInitialState.Enabled = false;
             }
             else
             {
@@ -765,6 +779,49 @@ namespace Automaton
             {
                 cboSymbol.Items.Add(symbol);
             }
+        }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            btnGraph.Enabled = true;
+            btnAddTransition.Enabled = true;
+            btnAddStates.Enabled = true;
+            btnAddsymbols.Enabled = true;
+            btnAddInitialState.Enabled = true;
+            btnAcceptanceStates.Enabled = true;
+            btnRemoveAcceptanceStates.Enabled = true;
+            btnRemoveStates.Enabled = true;
+            btnRemoveSymbols.Enabled = true;
+            btnRemoveInitialState.Enabled = true;
+
+            automaton = automatonCopy;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            label.Text = "Input symbol: En este campo debes ingresar los símbolos de entrada que vas a usar (ej: 1, 0), separados por coma.\n\n" +
+                "States: En este campo debes ingresar los estados (ej: A, B, C), separados por coma.\n\n" +
+                "Initial State: En este campo debes ingresar el estado inicial para graficar el autómata.\n\n" +
+                "States of acceptance: En este campo debes ingresar los estados de aceptación del autómata.\n\n" +
+                "Origin: En este campo debes escoger el estado de origen de tu nueva transición.\n\n" +
+                "Symbol: En este campo debes escoger el símbolo de entrada para tu estado.\n\n" +
+                "Destination: En este campo debes escoger el estado al que se dirige tu transición.\n\n" +
+                "Botón Remove: Para eliminar los símbolos, estados o estados de aceptación, si es más de uno debes separarlos con coma (,).\n\n" +
+                "Botón Graph: Grafica el autómata.\n\n" +
+                "Data: Ver toda la información del autómata.\n\n" +
+                "Clean automata: Limpia el autómata.\n\n" +
+                "Modify initial automata: Permite hacerle modificaciones al autómata ingresado, NO al que es convertido.";
+            label.AutoSize = false; 
+            label.Size = new System.Drawing.Size(400, 430); 
+            label.Location = new System.Drawing.Point(10, 10);
+            label.BorderStyle = BorderStyle.FixedSingle;
+            form.Controls.Add(label);
+            form.Size = new System.Drawing.Size(450, 500);
+
+            form.ShowDialog();
+            
         }
     }
 }
