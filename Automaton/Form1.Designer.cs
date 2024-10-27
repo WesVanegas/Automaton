@@ -351,6 +351,7 @@
             this.btnRemoveInitialState.TabIndex = 19;
             this.btnRemoveInitialState.Text = "Remove";
             this.btnRemoveInitialState.UseVisualStyleBackColor = true;
+            this.btnRemoveInitialState.Click += new System.EventHandler(this.btnRemoveInitialState_Click);
             // 
             // btnRemoveAcceptanceStates
             // 

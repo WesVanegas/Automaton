@@ -255,6 +255,18 @@ namespace Automaton
             }
         }
 
+        private void RemoveInitialState(Dictionary<string, object> dict)
+        {
+            var dictInitialState = (List<string>)dict["initialState"];
+
+            if (dictInitialState.Count() != 0)
+            {
+                ShowTextinLog($"Initial state {dictInitialState[0]} was removed.");
+                dictInitialState.Clear();
+            }
+
+        }
+
 
         // Add Acceptance States function
         private void AddAcceptanceStates(Dictionary<string, object> dict, string states)
@@ -1010,6 +1022,12 @@ namespace Automaton
             string removeState = txtStates.Text;
             RemoveStates(automaton, removeState);
             txtStates.Clear();
+        }
+
+        private void btnRemoveInitialState_Click(object sender, EventArgs e)
+        {
+            RemoveInitialState(automaton);
+            txtInitialState.Clear();
         }
     }
 }
