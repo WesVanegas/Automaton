@@ -489,12 +489,13 @@ namespace Automaton
                 {"acceptanceStates", new List<string> { "b" }},
                 {"transitions", new Dictionary<(string state, string symbol), List<string>>
                     {
-                       { ("a", "1"), new List<string>{"b"} },
+                            { ("a", "1"), new List<string>{"b"} },
                        //{ ("a", "0"), new List<string>{"b"} },
                         { ("b", "0"), new List<string>{"a", "b"} },
                         { ("b", "1"), new List<string>{"c"} },
                         { ("c", "0"), new List<string>{"a"} },
                         { ("c", "1"), new List<string>{"b"} },
+
                     }
                 }
             };
@@ -780,6 +781,7 @@ namespace Automaton
             btnRemoveStates.Enabled = true;
             btnRemoveSymbols.Enabled = true;
             btnRemoveInitialState.Enabled = true;
+            btnModify.Enabled = false;
             CleanAutomaton(automaton);
         }
 
