@@ -75,6 +75,7 @@ namespace Automaton
                     dictSymbols.Remove(symbol);
                     ShowTextinLog($"Symbol {symbol} was removed.");
                     cboSymbol.Items.Remove(symbol);
+                    RemoveTransitionsBySymbol(dict, symbol);
                 }
                 else
                 {
@@ -82,13 +83,24 @@ namespace Automaton
                 }
 
             }
-            ShowTextinLog($"Symbols: {string.Join(", ", (List<string>)dict["symbols"])}");
 
         }
 
-        private void RemoveTransitions(Dictionary<string, object> dict, string symbol = "", string origin = "", string destination = "")
+        // Function to remove transitions after remove a symbol
+        private void RemoveTransitionsBySymbol(Dictionary<string, object> dict, string symbol)
         {
             var dictTransitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
+
+            var dictStates = (List<string>)dict["states"];
+
+            foreach (var originState in dictStates)
+            {
+                if (dictTransitions.ContainsKey((originState, symbol)))
+                {
+                    ShowTextinLog($"Transition: ({originState},{symbol})= {string.Join(", ", dictTransitions[(originState, symbol)])} was removed.");
+                    dictTransitions.Remove((originState, symbol));
+                }
+            }
 
         }
 
