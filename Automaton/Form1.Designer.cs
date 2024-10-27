@@ -361,6 +361,7 @@
             this.btnRemoveAcceptanceStates.TabIndex = 20;
             this.btnRemoveAcceptanceStates.Text = "Remove";
             this.btnRemoveAcceptanceStates.UseVisualStyleBackColor = true;
+            this.btnRemoveAcceptanceStates.Click += new System.EventHandler(this.btnRemoveAcceptanceStates_Click);
             // 
             // Form1
             // 

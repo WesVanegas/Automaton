@@ -255,6 +255,7 @@ namespace Automaton
             }
         }
 
+        // Remove inital state function
         private void RemoveInitialState(Dictionary<string, object> dict)
         {
             var dictInitialState = (List<string>)dict["initialState"];
@@ -263,6 +264,10 @@ namespace Automaton
             {
                 ShowTextinLog($"Initial state {dictInitialState[0]} was removed.");
                 dictInitialState.Clear();
+            }
+            else
+            {
+                ShowTextinLog("No initial state to remove.");
             }
 
         }
@@ -290,6 +295,30 @@ namespace Automaton
                 {
                     //MessageBox.Show($"No se pudo agregar estado {state}\nNo existe como estado o ya se encuentra en los estados que aceptan.");
                     ShowTextinLog($"No acceptance state added: {state}");
+                }
+            }
+
+        }
+
+        // Remove acceptance states function
+        private void RemoveAcceptanceStates(Dictionary<string, object> dict, string states)
+        {
+            string[] newAcceptanceStates = states.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Referencia a los estados de acceptación
+            var dictAcceptanceStates = (List<string>)dict["acceptanceStates"];
+            
+
+            foreach (var state in newAcceptanceStates)
+            {
+                if (dictAcceptanceStates.Contains(state))
+                {
+                    dictAcceptanceStates.Remove(state);
+                    ShowTextinLog($"Acceptance state {state} was removed.");
+                }
+                else
+                {
+                    ShowTextinLog($"Acceptance state {state} does not exist.");
                 }
             }
 
@@ -1028,6 +1057,13 @@ namespace Automaton
         {
             RemoveInitialState(automaton);
             txtInitialState.Clear();
+        }
+
+        private void btnRemoveAcceptanceStates_Click(object sender, EventArgs e)
+        {
+            string removeAcceptanceStates = txtAcceptanceStates.Text;
+            RemoveAcceptanceStates(automaton, removeAcceptanceStates);
+            txtAcceptanceStates.Clear();
         }
     }
 }
