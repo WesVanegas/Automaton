@@ -379,6 +379,42 @@ namespace Automaton
 
         }
 
+        // Remove transitions function
+        private void RemoveTransitions(Dictionary<string, object> dict, string origin, string symbol, string destination)
+        {
+            origin = origin.Trim();
+            symbol = symbol.Trim();
+            destination = destination.Trim();
+            if (origin == "" || symbol == "" || destination == "")
+            {
+                ShowTextinLog("Not all fields were selected");
+                return;
+            }
+
+            // Referencia a las transiciones {Key=(state, symbol): Value}
+            var dictTransitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
+
+            bool validation = dictTransitions.ContainsKey((origin, symbol));
+
+            if (validation)
+            {
+                if (dictTransitions[(origin, symbol)].Contains(destination))
+                {
+                    dictTransitions[(origin, symbol)].Remove(destination);
+                    ShowTextinLog($"Transition ({origin},{symbol}={destination} was removed.");
+
+                    if (dictTransitions[(origin, symbol)].Count()==0)
+                    {
+                        dictTransitions.Remove((origin, symbol));
+                    }
+                }
+            }
+            else
+            {
+                ShowTextinLog($"Transition ({origin},{symbol})={destination} does not exist.");
+            }
+        }
+
         private bool ValidateAutomatonContent(Dictionary<string, object> dict)
         {
             var dictAcceptanceStates = (List<string>)dict["acceptanceStates"];
@@ -736,6 +772,7 @@ namespace Automaton
                 btnRemoveStates.Enabled = false;
                 btnRemoveSymbols.Enabled = false;
                 btnRemoveInitialState.Enabled = false;
+                btnRemoveTransitions.Enabled = false;
             }
             else
             {
@@ -951,6 +988,7 @@ namespace Automaton
             btnRemoveSymbols.Enabled = true;
             btnRemoveInitialState.Enabled = true;
             btnModify.Enabled = false;
+            btnRemoveTransitions.Enabled = true;
             CleanAutomaton(automaton);
         }
 
@@ -997,6 +1035,7 @@ namespace Automaton
             btnRemoveStates.Enabled = true;
             btnRemoveSymbols.Enabled = true;
             btnRemoveInitialState.Enabled = true;
+            btnRemoveTransitions.Enabled = true;
 
             automaton = automatonCopy;
             ShowTextinLog($"Restored automaton.");
@@ -1064,6 +1103,18 @@ namespace Automaton
             string removeAcceptanceStates = txtAcceptanceStates.Text;
             RemoveAcceptanceStates(automaton, removeAcceptanceStates);
             txtAcceptanceStates.Clear();
+        }
+
+        private void btnRemoveTransitions_Click(object sender, EventArgs e)
+        {
+            string removeOrigin = cboOrigin.Text;
+            string removeSymbol = cboSymbol.Text;
+            string removeDestination = cboDestination.Text;
+
+            RemoveTransitions(automaton, removeOrigin, removeSymbol, removeDestination);
+            cboDestination.Text = "";
+            cboOrigin.Text = "";
+            cboSymbol.Text = "";
         }
     }
 }

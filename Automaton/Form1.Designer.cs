@@ -60,6 +60,7 @@
             this.btnRemoveStates = new System.Windows.Forms.Button();
             this.btnRemoveInitialState = new System.Windows.Forms.Button();
             this.btnRemoveAcceptanceStates = new System.Windows.Forms.Button();
+            this.btnRemoveTransitions = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,7 +170,7 @@
             // 
             // btnAddTransition
             // 
-            this.btnAddTransition.Location = new System.Drawing.Point(164, 242);
+            this.btnAddTransition.Location = new System.Drawing.Point(113, 242);
             this.btnAddTransition.Name = "btnAddTransition";
             this.btnAddTransition.Size = new System.Drawing.Size(100, 25);
             this.btnAddTransition.TabIndex = 12;
@@ -363,12 +364,23 @@
             this.btnRemoveAcceptanceStates.UseVisualStyleBackColor = true;
             this.btnRemoveAcceptanceStates.Click += new System.EventHandler(this.btnRemoveAcceptanceStates_Click);
             // 
+            // btnRemoveTransitions
+            // 
+            this.btnRemoveTransitions.Location = new System.Drawing.Point(223, 242);
+            this.btnRemoveTransitions.Name = "btnRemoveTransitions";
+            this.btnRemoveTransitions.Size = new System.Drawing.Size(100, 25);
+            this.btnRemoveTransitions.TabIndex = 29;
+            this.btnRemoveTransitions.Text = "Remove Transition";
+            this.btnRemoveTransitions.UseVisualStyleBackColor = true;
+            this.btnRemoveTransitions.Click += new System.EventHandler(this.btnRemoveTransitions_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnRemoveTransitions);
             this.Controls.Add(this.btnRemoveAcceptanceStates);
             this.Controls.Add(this.btnRemoveInitialState);
             this.Controls.Add(this.btnRemoveStates);
@@ -445,6 +457,7 @@
         private System.Windows.Forms.Button btnRemoveStates;
         private System.Windows.Forms.Button btnRemoveInitialState;
         private System.Windows.Forms.Button btnRemoveAcceptanceStates;
+        private System.Windows.Forms.Button btnRemoveTransitions;
     }
 }
 
