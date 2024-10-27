@@ -37,6 +37,11 @@ namespace Automaton
 
             foreach (string symbol in newSymbols)
             {
+                if (symbol.Count()>1)
+                {
+                    ShowTextinLog($"{symbol} has more than one character, not added.");
+                    continue;
+                }
 
                 // Verificar que el o los simbolos ingresados no existan
                 if (dictSymbols.Contains(symbol))
@@ -51,10 +56,9 @@ namespace Automaton
                     cboSymbol.Items.Add(symbol);
                     //MessageBox.Show($"Símbolos: {string.Join(", ", (List<string>)dict["symbols"])}");
                     ShowTextinLog($"Symbol added: {symbol}");
-                    ShowTextinLog($"Symbols: {string.Join(", ", (List<string>)dict["symbols"])}");
-
                 }
             }
+            ShowTextinLog($"Symbols: {string.Join(", ", (List<string>)dict["symbols"])}");
         }
         // Add new states function
         private void AddStates(Dictionary<string, object> dict, string states)
@@ -831,6 +835,15 @@ namespace Automaton
 
             automaton = automatonCopy;
             ShowTextinLog($"Restored automaton.");
+            //GraphicAutomaton(automaton);
+            /*
+            if (pictureBox1.Image != null)
+            {
+                pictureBox1.Image.Dispose();
+                pictureBox1.Image = null;
+                pictureBox1.Update();
+            }
+             */
 
         }
 
@@ -858,6 +871,11 @@ namespace Automaton
             form.Size = new System.Drawing.Size(450, 500);
 
             form.ShowDialog();
+
+        }
+
+        private void btnRemoveSymbols_Click(object sender, EventArgs e)
+        {
 
         }
     }

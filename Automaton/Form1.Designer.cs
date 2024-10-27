@@ -331,6 +331,7 @@
             this.btnRemoveSymbols.TabIndex = 30;
             this.btnRemoveSymbols.Text = "Remove";
             this.btnRemoveSymbols.UseVisualStyleBackColor = true;
+            this.btnRemoveSymbols.Click += new System.EventHandler(this.btnRemoveSymbols_Click);
             // 
             // btnRemoveStates
             // 
