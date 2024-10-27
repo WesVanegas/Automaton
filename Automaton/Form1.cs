@@ -296,7 +296,7 @@ namespace Automaton
                 sb.AppendLine($"{item.Key}: {ValueConverter(item.Value)}");
             }
 
-            MessageBox.Show(sb.ToString(), "Contents of the automaton");
+            MessageBox.Show(sb.ToString(), "Automaton");
         }
 
         private static string ValueConverter(object value)
@@ -514,12 +514,34 @@ namespace Automaton
             AddStates(automaton, states);
             txtStates.Clear();
         }
+        private Dictionary<string, object> DeepCopyAutomaton(Dictionary<string, object> original)
+        {
+            var copy = new Dictionary<string, object>();
+
+            foreach (var entry in original)
+            {
+                if (entry.Value is List<string>)
+                {
+                    copy[entry.Key] = new List<string>((List<string>)entry.Value);
+                }
+                else if (entry.Value is Dictionary<string, string>)
+                {
+                    copy[entry.Key] = new Dictionary<string, string>((Dictionary<string, string>)entry.Value);
+                }
+                else
+                {
+                    copy[entry.Key] = entry.Value;
+                }
+            }
+
+            return copy;
+        }
 
         private void btnGraph_Click(object sender, EventArgs e)
         {
             if (ValidateAutomatonContent(automaton))
             {
-                automatonCopy = automaton;
+                automatonCopy = DeepCopyAutomaton(automaton);
                 if (IsNFA(automaton))
                 {
                     MessageBox.Show("The introduced automaton is Finite NOT Deterministic (NFA)");
@@ -806,6 +828,8 @@ namespace Automaton
             btnRemoveInitialState.Enabled = true;
 
             automaton = automatonCopy;
+            ShowTextinLog($"Restored automaton.");
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -824,15 +848,15 @@ namespace Automaton
                 "Data: Ver toda la información del autómata.\n\n" +
                 "Clean automata: Limpia el autómata.\n\n" +
                 "Modify initial automata: Permite hacerle modificaciones al autómata ingresado, NO al que es convertido.";
-            label.AutoSize = false; 
-            label.Size = new System.Drawing.Size(400, 430); 
+            label.AutoSize = false;
+            label.Size = new System.Drawing.Size(400, 430);
             label.Location = new System.Drawing.Point(10, 10);
             label.BorderStyle = BorderStyle.FixedSingle;
             form.Controls.Add(label);
             form.Size = new System.Drawing.Size(450, 500);
 
             form.ShowDialog();
-            
+
         }
     }
 }
