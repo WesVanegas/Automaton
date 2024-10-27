@@ -47,7 +47,7 @@ namespace Automaton
                 if (dictSymbols.Contains(symbol))
                 {
                     //MessageBox.Show($"Simbolo {symbol} ya existe!");
-                    ShowTextinLog($"Simbolo {symbol} ya existe!");
+                    ShowTextinLog($"Symbol {symbol} already exists!");
                 }
                 else
                 {
@@ -60,6 +60,38 @@ namespace Automaton
             }
             ShowTextinLog($"Symbols: {string.Join(", ", (List<string>)dict["symbols"])}");
         }
+
+        // Remove symbols function
+        private void RemoveSymbols(Dictionary<string, object> dict, string symbols)
+        {
+            string [] listSymbols = symbols.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            var dictSymbols = (List<string>)dict["symbols"];
+
+            foreach (var symbol in listSymbols)
+            {
+                if (dictSymbols.Contains(symbol))
+                {
+                    dictSymbols.Remove(symbol);
+                    ShowTextinLog($"Symbol {symbol} was removed.");
+                    cboSymbol.Items.Remove(symbol);
+                }
+                else
+                {
+                    ShowTextinLog($"Symbol {symbol} does not exist.");
+                }
+
+            }
+            ShowTextinLog($"Symbols: {string.Join(", ", (List<string>)dict["symbols"])}");
+
+        }
+
+        private void RemoveTransitions(Dictionary<string, object> dict, string symbol = "", string origin = "", string destination = "")
+        {
+            var dictTransitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
+
+        }
+
         // Add new states function
         private void AddStates(Dictionary<string, object> dict, string states)
         {
@@ -876,7 +908,8 @@ namespace Automaton
 
         private void btnRemoveSymbols_Click(object sender, EventArgs e)
         {
-
+            string removeSymbol = txtSymbols.Text;
+            RemoveSymbols(automaton, removeSymbol);
         }
     }
 }
