@@ -86,7 +86,7 @@
             this.txtAcceptanceStates.MaxLength = 10;
             this.txtAcceptanceStates.Name = "txtAcceptanceStates";
             this.txtAcceptanceStates.Size = new System.Drawing.Size(79, 20);
-            this.txtAcceptanceStates.TabIndex = 3;
+            this.txtAcceptanceStates.TabIndex = 7;
             // 
             // label2
             // 
@@ -94,7 +94,7 @@
             this.label2.Location = new System.Drawing.Point(48, 117);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 13);
-            this.label2.TabIndex = 2;
+            this.label2.TabIndex = 24;
             this.label2.Text = "States of acceptance";
             // 
             // label3
@@ -103,7 +103,7 @@
             this.label3.Location = new System.Drawing.Point(48, 64);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 22;
             this.label3.Text = "States";
             // 
             // txtStates
@@ -128,7 +128,7 @@
             this.label4.Location = new System.Drawing.Point(48, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 13);
-            this.label4.TabIndex = 4;
+            this.label4.TabIndex = 23;
             this.label4.Text = "Initial state";
             // 
             // label5
@@ -137,7 +137,7 @@
             this.label5.Location = new System.Drawing.Point(184, 151);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
-            this.label5.TabIndex = 6;
+            this.label5.TabIndex = 25;
             this.label5.Text = "Transitions";
             // 
             // label6
@@ -146,7 +146,7 @@
             this.label6.Location = new System.Drawing.Point(90, 179);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 13);
-            this.label6.TabIndex = 7;
+            this.label6.TabIndex = 26;
             this.label6.Text = "Origin";
             // 
             // label7
@@ -155,7 +155,7 @@
             this.label7.Location = new System.Drawing.Point(201, 179);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 13);
-            this.label7.TabIndex = 9;
+            this.label7.TabIndex = 27;
             this.label7.Text = "Symbol";
             // 
             // label8
@@ -164,7 +164,7 @@
             this.label8.Location = new System.Drawing.Point(291, 179);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(60, 13);
-            this.label8.TabIndex = 11;
+            this.label8.TabIndex = 28;
             this.label8.Text = "Destination";
             // 
             // btnAddTransition
@@ -172,7 +172,7 @@
             this.btnAddTransition.Location = new System.Drawing.Point(164, 242);
             this.btnAddTransition.Name = "btnAddTransition";
             this.btnAddTransition.Size = new System.Drawing.Size(100, 25);
-            this.btnAddTransition.TabIndex = 14;
+            this.btnAddTransition.TabIndex = 12;
             this.btnAddTransition.Text = "Add Transition";
             this.btnAddTransition.UseVisualStyleBackColor = true;
             this.btnAddTransition.Click += new System.EventHandler(this.btnAddTransition_Click);
@@ -182,7 +182,7 @@
             this.btnGraph.Location = new System.Drawing.Point(164, 321);
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(100, 25);
-            this.btnGraph.TabIndex = 15;
+            this.btnGraph.TabIndex = 14;
             this.btnGraph.Text = "Graph";
             this.btnGraph.UseVisualStyleBackColor = true;
             this.btnGraph.Click += new System.EventHandler(this.btnGraph_Click);
@@ -214,7 +214,7 @@
             this.btnAddsymbols.Location = new System.Drawing.Point(248, 35);
             this.btnAddsymbols.Name = "btnAddsymbols";
             this.btnAddsymbols.Size = new System.Drawing.Size(75, 23);
-            this.btnAddsymbols.TabIndex = 18;
+            this.btnAddsymbols.TabIndex = 2;
             this.btnAddsymbols.Text = "Add ";
             this.btnAddsymbols.UseVisualStyleBackColor = true;
             this.btnAddsymbols.Click += new System.EventHandler(this.btnAddsymbols_Click);
@@ -224,7 +224,7 @@
             this.btnAddStates.Location = new System.Drawing.Point(248, 61);
             this.btnAddStates.Name = "btnAddStates";
             this.btnAddStates.Size = new System.Drawing.Size(75, 23);
-            this.btnAddStates.TabIndex = 19;
+            this.btnAddStates.TabIndex = 4;
             this.btnAddStates.Text = "Add ";
             this.btnAddStates.UseVisualStyleBackColor = true;
             this.btnAddStates.Click += new System.EventHandler(this.btnAddStates_Click);
@@ -234,7 +234,7 @@
             this.btnAddInitialState.Location = new System.Drawing.Point(248, 86);
             this.btnAddInitialState.Name = "btnAddInitialState";
             this.btnAddInitialState.Size = new System.Drawing.Size(75, 23);
-            this.btnAddInitialState.TabIndex = 20;
+            this.btnAddInitialState.TabIndex = 6;
             this.btnAddInitialState.Text = "Add";
             this.btnAddInitialState.UseVisualStyleBackColor = true;
             this.btnAddInitialState.Click += new System.EventHandler(this.btnAddInitialState_Click);
@@ -244,7 +244,7 @@
             this.btnAcceptanceStates.Location = new System.Drawing.Point(248, 114);
             this.btnAcceptanceStates.Name = "btnAcceptanceStates";
             this.btnAcceptanceStates.Size = new System.Drawing.Size(75, 23);
-            this.btnAcceptanceStates.TabIndex = 21;
+            this.btnAcceptanceStates.TabIndex = 8;
             this.btnAcceptanceStates.Text = "Add";
             this.btnAcceptanceStates.UseVisualStyleBackColor = true;
             this.btnAcceptanceStates.Click += new System.EventHandler(this.btnAcceptanceStates_Click);
@@ -254,7 +254,7 @@
             this.btnViewAutomaton.Location = new System.Drawing.Point(58, 321);
             this.btnViewAutomaton.Name = "btnViewAutomaton";
             this.btnViewAutomaton.Size = new System.Drawing.Size(100, 25);
-            this.btnViewAutomaton.TabIndex = 22;
+            this.btnViewAutomaton.TabIndex = 13;
             this.btnViewAutomaton.Text = "Data";
             this.btnViewAutomaton.UseVisualStyleBackColor = true;
             this.btnViewAutomaton.Click += new System.EventHandler(this.btnViewAutomaton_Click);
@@ -284,7 +284,7 @@
             this.cboOrigin.Location = new System.Drawing.Point(58, 215);
             this.cboOrigin.Name = "cboOrigin";
             this.cboOrigin.Size = new System.Drawing.Size(100, 21);
-            this.cboOrigin.TabIndex = 25;
+            this.cboOrigin.TabIndex = 9;
             // 
             // cboSymbol
             // 
@@ -292,7 +292,7 @@
             this.cboSymbol.Location = new System.Drawing.Point(164, 215);
             this.cboSymbol.Name = "cboSymbol";
             this.cboSymbol.Size = new System.Drawing.Size(100, 21);
-            this.cboSymbol.TabIndex = 26;
+            this.cboSymbol.TabIndex = 10;
             // 
             // cboDestination
             // 
@@ -300,7 +300,7 @@
             this.cboDestination.Location = new System.Drawing.Point(269, 215);
             this.cboDestination.Name = "cboDestination";
             this.cboDestination.Size = new System.Drawing.Size(100, 21);
-            this.cboDestination.TabIndex = 27;
+            this.cboDestination.TabIndex = 11;
             // 
             // btnModify
             // 
@@ -308,7 +308,7 @@
             this.btnModify.Location = new System.Drawing.Point(164, 352);
             this.btnModify.Name = "btnModify";
             this.btnModify.Size = new System.Drawing.Size(205, 25);
-            this.btnModify.TabIndex = 28;
+            this.btnModify.TabIndex = 15;
             this.btnModify.Text = "Modify initial automata";
             this.btnModify.UseVisualStyleBackColor = true;
             this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
@@ -318,7 +318,7 @@
             this.button2.Location = new System.Drawing.Point(375, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(31, 23);
-            this.button2.TabIndex = 29;
+            this.button2.TabIndex = 21;
             this.button2.Text = "?";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -328,7 +328,7 @@
             this.btnRemoveSymbols.Location = new System.Drawing.Point(329, 35);
             this.btnRemoveSymbols.Name = "btnRemoveSymbols";
             this.btnRemoveSymbols.Size = new System.Drawing.Size(77, 23);
-            this.btnRemoveSymbols.TabIndex = 30;
+            this.btnRemoveSymbols.TabIndex = 17;
             this.btnRemoveSymbols.Text = "Remove";
             this.btnRemoveSymbols.UseVisualStyleBackColor = true;
             this.btnRemoveSymbols.Click += new System.EventHandler(this.btnRemoveSymbols_Click);
@@ -338,7 +338,7 @@
             this.btnRemoveStates.Location = new System.Drawing.Point(329, 61);
             this.btnRemoveStates.Name = "btnRemoveStates";
             this.btnRemoveStates.Size = new System.Drawing.Size(77, 23);
-            this.btnRemoveStates.TabIndex = 31;
+            this.btnRemoveStates.TabIndex = 18;
             this.btnRemoveStates.Text = "Remove";
             this.btnRemoveStates.UseVisualStyleBackColor = true;
             // 
@@ -347,7 +347,7 @@
             this.btnRemoveInitialState.Location = new System.Drawing.Point(329, 86);
             this.btnRemoveInitialState.Name = "btnRemoveInitialState";
             this.btnRemoveInitialState.Size = new System.Drawing.Size(77, 23);
-            this.btnRemoveInitialState.TabIndex = 32;
+            this.btnRemoveInitialState.TabIndex = 19;
             this.btnRemoveInitialState.Text = "Remove";
             this.btnRemoveInitialState.UseVisualStyleBackColor = true;
             // 
@@ -356,7 +356,7 @@
             this.btnRemoveAcceptanceStates.Location = new System.Drawing.Point(329, 114);
             this.btnRemoveAcceptanceStates.Name = "btnRemoveAcceptanceStates";
             this.btnRemoveAcceptanceStates.Size = new System.Drawing.Size(77, 23);
-            this.btnRemoveAcceptanceStates.TabIndex = 33;
+            this.btnRemoveAcceptanceStates.TabIndex = 20;
             this.btnRemoveAcceptanceStates.Text = "Remove";
             this.btnRemoveAcceptanceStates.UseVisualStyleBackColor = true;
             // 
