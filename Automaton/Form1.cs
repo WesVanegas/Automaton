@@ -132,6 +132,86 @@ namespace Automaton
             }
         }
 
+        // Remove states function
+        private void RemoveStates(Dictionary<string, object> dict, string states)
+        {
+            string[] listStates = states.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            var dictStates = (List<string>)dict["states"];
+            var dictInitialStates = (List<string>)dict["initialState"];
+            var dictAcceptanceStates = (List<string>)dict["acceptanceStates"];
+
+            foreach (var state in listStates)
+            {
+                if (dictStates.Contains(state))
+                {
+                    dictStates.Remove(state);
+                    ShowTextinLog($"State {state} was removed.");
+                    cboOrigin.Items.Remove(state);
+                    cboDestination.Items.Remove(state);
+
+                    if (dictInitialStates.Contains(state))
+                    {
+                        dictInitialStates.Remove(state);
+                        ShowTextinLog($"Initial state {state} was removed.");
+                    }
+                    if (dictAcceptanceStates.Contains(state))
+                    {
+                        dictAcceptanceStates.Remove(state);
+                        ShowTextinLog($"Acceptance state {state} was removed.");
+                    }
+
+                    RemoveTransitionsByState(dict, state);
+                }
+                else
+                {
+                    ShowTextinLog($"State {state} does not exist.");
+                }
+            }
+        }
+
+        // Function to remove transitions after remove a symbol
+        private void RemoveTransitionsByState(Dictionary<string, object> dict, string state)
+        {
+            var dictTransitions = (Dictionary<(string state, string symbol), List<string>>)dict["transitions"];
+
+            // Remove destinations
+            foreach (var transition in dictTransitions)
+            {
+                if (transition.Value.Contains(state))
+                {
+                    transition.Value.Remove(state);
+                    ShowTextinLog($"Removed {transition.Key.ToString()}={state}");
+                }
+            }
+
+            // Clean empty transitions
+            var copyTransitions = new Dictionary<(string state, string symbol), List<string>>(dictTransitions);
+            foreach (var transition in copyTransitions)
+            {
+                if (transition.Value.Count() == 0)
+                {
+                    dictTransitions.Remove(transition.Key);
+                }
+            }
+
+            // Remove origins
+            var dictSymbols = (List<string>)dict["symbols"];
+
+            foreach (var symbol in dictSymbols)
+            {
+                if (dictTransitions.ContainsKey((state, symbol)))
+                {
+                    ShowTextinLog($"Transition: ({state},{symbol})= {string.Join(", ", dictTransitions[(state, symbol)])} was removed.");
+                    dictTransitions.Remove((state, symbol));
+                }
+            }
+
+
+        }
+
+
+
         // Add initial state function
 
         private void AddInitialState(Dictionary<string, object> dict, string state)
@@ -922,6 +1002,14 @@ namespace Automaton
         {
             string removeSymbol = txtSymbols.Text;
             RemoveSymbols(automaton, removeSymbol);
+            txtSymbols.Clear();
+        }
+
+        private void btnRemoveStates_Click(object sender, EventArgs e)
+        {
+            string removeState = txtStates.Text;
+            RemoveStates(automaton, removeState);
+            txtStates.Clear();
         }
     }
 }
