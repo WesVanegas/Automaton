@@ -1156,10 +1156,7 @@ namespace Automaton
 
         private void cboDestination_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+
         }
     }
 }
