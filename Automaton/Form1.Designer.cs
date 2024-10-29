@@ -61,6 +61,7 @@
             this.btnRemoveInitialState = new System.Windows.Forms.Button();
             this.btnRemoveAcceptanceStates = new System.Windows.Forms.Button();
             this.btnRemoveTransitions = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -384,12 +385,24 @@
             this.btnRemoveTransitions.UseVisualStyleBackColor = true;
             this.btnRemoveTransitions.Click += new System.EventHandler(this.btnRemoveTransitions_Click);
             // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(128, 536);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(174, 13);
+            this.label10.TabIndex = 30;
+            this.label10.Text = "By Juana solano - Wesley Vanegas";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.btnRemoveTransitions);
             this.Controls.Add(this.btnRemoveAcceptanceStates);
             this.Controls.Add(this.btnRemoveInitialState);
@@ -468,6 +481,7 @@
         private System.Windows.Forms.Button btnRemoveInitialState;
         private System.Windows.Forms.Button btnRemoveAcceptanceStates;
         private System.Windows.Forms.Button btnRemoveTransitions;
+        private System.Windows.Forms.Label label10;
     }
 }
 
