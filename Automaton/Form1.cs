@@ -791,7 +791,7 @@ namespace Automaton
             var newTransitions = new Dictionary<(string state, string symbol), List<string>>();
             var newAcceptanceStateList = new List<string>();
 
-            CreateInitialTransition(dict, transitions, newTransitions);
+            CreateInitialTransition(dict, transitions, newTransitions, symbols);
 
             //Empezar a partir de los demas estados, rellenar transiciones
 
@@ -926,7 +926,7 @@ namespace Automaton
             }
         }
 
-        private void CreateInitialTransition(Dictionary<string, object> dict, Dictionary<(string state, string symbol), List<string>> transitions, Dictionary<(string state, string symbol), List<string>> newTransitions)
+        private void CreateInitialTransition(Dictionary<string, object> dict, Dictionary<(string state, string symbol), List<string>> transitions, Dictionary<(string state, string symbol), List<string>> newTransitions, List<string> symbols)
         {
             var initialState = (List<string>)dict["initialState"];
             var keys = transitions.Keys.Select(x => x.state).ToArray();
@@ -937,7 +937,15 @@ namespace Automaton
                 {
                     newTransitions.Add(tr.Key, new List<string>());
                 }
+                foreach (var symbol in symbols)
+                {
+                    if (!newTransitions.Keys.Contains((tr.Key.state, symbol)))
+                    {
+                        newTransitions.Add((tr.Key.state, symbol), new List<string>());
+                    }
+                }
             }
+           
 
         }
 
