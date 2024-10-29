@@ -111,8 +111,10 @@ namespace Automaton
             string[] newStates = states.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
             //Referencia a la lista de simbolos en el diccionario
             var dictStates = (List<string>)dict["states"];
-            foreach (string state in newStates)
+            foreach (string value in newStates)
             {
+                HashSet<char> uniqueChars = new HashSet<char>(value);
+                string state = new string(uniqueChars.ToArray());
                 // Verificar que el o los estados ingresadso no existan
                 if (dictStates.Contains(state))
                 {
