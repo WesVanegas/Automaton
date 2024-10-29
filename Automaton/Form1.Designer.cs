@@ -88,6 +88,7 @@
             this.txtAcceptanceStates.Name = "txtAcceptanceStates";
             this.txtAcceptanceStates.Size = new System.Drawing.Size(79, 20);
             this.txtAcceptanceStates.TabIndex = 7;
+            this.txtAcceptanceStates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAcceptanceStates_KeyPress);
             // 
             // label2
             // 
@@ -114,6 +115,7 @@
             this.txtStates.Name = "txtStates";
             this.txtStates.Size = new System.Drawing.Size(100, 20);
             this.txtStates.TabIndex = 3;
+            this.txtStates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStates_KeyPress);
             // 
             // txtInitialState
             // 
@@ -122,6 +124,7 @@
             this.txtInitialState.Name = "txtInitialState";
             this.txtInitialState.Size = new System.Drawing.Size(100, 20);
             this.txtInitialState.TabIndex = 5;
+            this.txtInitialState.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInitialState_KeyPress);
             // 
             // label4
             // 
@@ -286,6 +289,7 @@
             this.cboOrigin.Name = "cboOrigin";
             this.cboOrigin.Size = new System.Drawing.Size(100, 21);
             this.cboOrigin.TabIndex = 9;
+            this.cboOrigin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboOrigin_KeyPress);
             // 
             // cboSymbol
             // 
@@ -302,6 +306,7 @@
             this.cboDestination.Name = "cboDestination";
             this.cboDestination.Size = new System.Drawing.Size(100, 21);
             this.cboDestination.TabIndex = 11;
+            this.cboDestination.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboDestination_KeyPress);
             // 
             // btnModify
             // 
