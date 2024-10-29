@@ -127,9 +127,9 @@ namespace Automaton
                     cboDestination.Items.Add(state);
                     //MessageBox.Show($"Estados: {string.Join(", ", (List<string>)dict["states"])}");
                     ShowTextinLog($"State was added: {state}");
-                    ShowTextinLog($"States: {string.Join(", ", (List<string>)dict["states"])}");
                 }
             }
+            ShowTextinLog($"States: {string.Join(", ", (List<string>)dict["states"])}");
         }
 
         // Remove states function
@@ -1124,7 +1124,9 @@ namespace Automaton
         private void txtStates_KeyPress(object sender, KeyPressEventArgs e)
         {
             
-            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) &&
+                e.KeyChar != ' ' && e.KeyChar != ',' && e.KeyChar != '.' &&
+                e.KeyChar != '-')
             {
                 e.Handled = true;
             }
@@ -1140,7 +1142,9 @@ namespace Automaton
 
         private void txtAcceptanceStates_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) &&
+                e.KeyChar != ' ' && e.KeyChar != ',' && e.KeyChar != '.' &&
+                e.KeyChar != '-')
             {
                 e.Handled = true;
             }
@@ -1156,7 +1160,10 @@ namespace Automaton
 
         private void cboDestination_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
