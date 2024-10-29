@@ -933,10 +933,6 @@ namespace Automaton
             var initialStateTransitions = transitions.Where(x => x.Key.state == initialState[0]);
             foreach (var tr in initialStateTransitions)
             {
-                if (tr.Key.state != null && tr.Key.symbol != null)
-                {
-                    newTransitions.Add(tr.Key, new List<string>());
-                }
                 foreach (var symbol in symbols)
                 {
                     if (!newTransitions.Keys.Contains((tr.Key.state, symbol)))
