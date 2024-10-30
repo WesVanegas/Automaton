@@ -115,6 +115,12 @@ namespace Automaton
             {
                 HashSet<char> uniqueChars = new HashSet<char>(value);
                 string state = new string(uniqueChars.ToArray());
+
+                if (state.Count() > 2)
+                {
+                    ShowTextinLog($"{state} has more than one character, not added.");
+                    continue;
+                }
                 // Verificar que el o los estados ingresadso no existan
                 if (dictStates.Contains(state))
                 {
