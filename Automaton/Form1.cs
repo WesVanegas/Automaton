@@ -885,44 +885,6 @@ namespace Automaton
                     }
                 }
 
-
-                //Hay que buscar por cada estado, su destino
-                //foreach (var item in states)
-                //{
-                //    values = transitions.Where(x => x.Key == (item, symbol)).SelectMany(x => x.Value).Distinct().ToList();
-                //    foreach (var item1 in values)
-                //    {
-                //        valuesCompleted.Add(item1);
-                //    }
-                //}
-
-                //var concatenacion = string.Empty;
-                //if (valuesCompleted.Count == 0)
-                //{
-                //    for (int i = 0; i < states.Count; i++)
-                //    {
-                //        values = transitions.Where(x => x.Key == (states[i], symbol)).SelectMany(x => x.Value).Distinct().ToList();
-                //        if (values.Count != 0)
-                //        {
-                //            foreach (var value in values)
-                //            {
-                //                valuesCompleted.Add(value);
-                //            }
-                //        }
-                //        else
-                //        {
-                //            concatenacion += states[i].ToString();
-                //            values = transitions.Where(x => x.Key == (concatenacion, symbol)).SelectMany(x => x.Value).Distinct().ToList();
-                //            if (values.Count != 0)
-                //            {
-                //                foreach (var value in values)
-                //                {
-                //                    valuesCompleted.Add(value);
-                //                }
-                //            }
-                //        }
-                //    }
-                //}
                 valuesCompleted = valuesCompleted.Distinct().ToList();
                 valuesCompleted.Sort(StringComparer.Ordinal);
                 if (valuesCompleted.Count > 1)
