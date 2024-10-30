@@ -37,7 +37,7 @@ namespace Automaton
 
             foreach (string symbol in newSymbols)
             {
-                if (symbol.Count()>1)
+                if (symbol.Count() > 1)
                 {
                     ShowTextinLog($"{symbol} has more than one character, not added.");
                     continue;
@@ -64,7 +64,7 @@ namespace Automaton
         // Remove symbols function
         private void RemoveSymbols(Dictionary<string, object> dict, string symbols)
         {
-            string [] listSymbols = symbols.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] listSymbols = symbols.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
 
             var dictSymbols = (List<string>)dict["symbols"];
 
@@ -309,7 +309,7 @@ namespace Automaton
 
             // Referencia a los estados de acceptación
             var dictAcceptanceStates = (List<string>)dict["acceptanceStates"];
-            
+
 
             foreach (var state in newAcceptanceStates)
             {
@@ -405,7 +405,7 @@ namespace Automaton
                     dictTransitions[(origin, symbol)].Remove(destination);
                     ShowTextinLog($"Transition ({origin},{symbol}={destination} was removed.");
 
-                    if (dictTransitions[(origin, symbol)].Count()==0)
+                    if (dictTransitions[(origin, symbol)].Count() == 0)
                     {
                         dictTransitions.Remove((origin, symbol));
                     }
@@ -691,17 +691,15 @@ namespace Automaton
             automaton = new Dictionary<string, object>
             {
                 {"symbols", new List<string> { "1", "0" }},
-                {"states", new List<string> { "a", "b", "c"}},
-                {"initialState", new List<string> { "a" } },
-                {"acceptanceStates", new List<string> { "b" }},
+                {"states", new List<string> { "q0", "q1", "q2"}},
+                {"initialState", new List<string> { "q0" } },
+                {"acceptanceStates", new List<string> { "q2" }},
                 {"transitions", new Dictionary<(string state, string symbol), List<string>>
                     {
-                            { ("a", "1"), new List<string>{"b"} },
-                       //{ ("a", "0"), new List<string>{"b"} },
-                        { ("b", "0"), new List<string>{"a", "b"} },
-                        { ("b", "1"), new List<string>{"c"} },
-                        { ("c", "0"), new List<string>{"a"} },
-                        { ("c", "1"), new List<string>{"b"} },
+                            { ("q0", "1"), new List<string>{"q0"} },
+                            { ("q0", "0"), new List<string>{"q0", "q1"} },
+                            { ("q1", "1"), new List<string>{"q2"} },
+
 
                     }
                 }
@@ -828,6 +826,8 @@ namespace Automaton
             if (tr.Key.state.Count() > 1 && tr.Key.state != "Error")
             {
                 var states = new List<string>();
+                var symbol = tr.Key.symbol;
+                var values = new List<string>();
                 var valuesCompleted = new List<string>();
                 foreach (var state in tr.Key.state)
                 {
@@ -837,15 +837,40 @@ namespace Automaton
                 //Hay que buscar por cada estado, su destino
                 foreach (var item in states)
                 {
-                    var symbol = tr.Key.symbol;
-                    var values = transitions.Where(x => x.Key == (item, symbol)).SelectMany(x => x.Value).Distinct().ToList();
+                    values = transitions.Where(x => x.Key == (item, symbol)).SelectMany(x => x.Value).Distinct().ToList();
                     foreach (var item1 in values)
                     {
                         valuesCompleted.Add(item1);
-
                     }
                 }
 
+                var concatenacion = string.Empty;
+                if (valuesCompleted.Count == 0)
+                {
+                    for (int i = 0; i < states.Count; i++)
+                    {
+                        values = transitions.Where(x => x.Key == (states[i], symbol)).SelectMany(x => x.Value).Distinct().ToList();
+                        if (values.Count != 0)
+                        {
+                            foreach (var value in values)
+                            {
+                                valuesCompleted.Add(value);
+                            }
+                        }
+                        else
+                        {
+                            concatenacion += states[i].ToString();
+                            values = transitions.Where(x => x.Key == (concatenacion, symbol)).SelectMany(x => x.Value).Distinct().ToList();
+                            if (values.Count != 0)
+                            {
+                                foreach (var value in values)
+                                {
+                                    valuesCompleted.Add(value);
+                                }
+                            }
+                        }
+                    }
+                }
                 valuesCompleted = valuesCompleted.Distinct().ToList();
                 valuesCompleted.Sort(StringComparer.Ordinal);
                 if (valuesCompleted.Count > 1)
@@ -943,7 +968,7 @@ namespace Automaton
                     }
                 }
             }
-           
+
 
         }
 
@@ -1125,7 +1150,7 @@ namespace Automaton
 
         private void txtStates_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
             if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) &&
                 e.KeyChar != ' ' && e.KeyChar != ',' && e.KeyChar != '.' &&
                 e.KeyChar != '-')
