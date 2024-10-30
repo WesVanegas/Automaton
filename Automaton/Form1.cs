@@ -37,7 +37,7 @@ namespace Automaton
 
             foreach (string symbol in newSymbols)
             {
-                if (symbol.Count()>1)
+                if (symbol.Count() > 1)
                 {
                     ShowTextinLog($"{symbol} has more than one character, not added.");
                     continue;
@@ -64,7 +64,7 @@ namespace Automaton
         // Remove symbols function
         private void RemoveSymbols(Dictionary<string, object> dict, string symbols)
         {
-            string [] listSymbols = symbols.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] listSymbols = symbols.Split(new char[] { ' ', ',', '.', '-' }, StringSplitOptions.RemoveEmptyEntries);
 
             var dictSymbols = (List<string>)dict["symbols"];
 
@@ -309,7 +309,7 @@ namespace Automaton
 
             // Referencia a los estados de acceptación
             var dictAcceptanceStates = (List<string>)dict["acceptanceStates"];
-            
+
 
             foreach (var state in newAcceptanceStates)
             {
@@ -405,7 +405,7 @@ namespace Automaton
                     dictTransitions[(origin, symbol)].Remove(destination);
                     ShowTextinLog($"Transition ({origin},{symbol}={destination} was removed.");
 
-                    if (dictTransitions[(origin, symbol)].Count()==0)
+                    if (dictTransitions[(origin, symbol)].Count() == 0)
                     {
                         dictTransitions.Remove((origin, symbol));
                     }
@@ -828,21 +828,60 @@ namespace Automaton
             if (tr.Key.state.Count() > 1 && tr.Key.state != "Error")
             {
                 var states = new List<string>();
+                var symbol = tr.Key.symbol;
+                var values = new List<string>();
                 var valuesCompleted = new List<string>();
-                foreach (var state in tr.Key.state)
-                {
-                    states.Add(state.ToString());
-                }
 
-                //Hay que buscar por cada estado, su destino
-                foreach (var item in states)
+                if (tr.Key.state.Count() % 2 == 0 && tr.Key.state.Count() >= 4)
                 {
-                    var symbol = tr.Key.symbol;
-                    var values = transitions.Where(x => x.Key == (item, symbol)).SelectMany(x => x.Value).Distinct().ToList();
+                    var concatenacion = string.Empty;
+                    var firsthalf = tr.Key.state.Substring(0, tr.Key.state.Length / 2);
+                    var secondhalf = tr.Key.state.Substring(2, tr.Key.state.Length / 2);
+
+                    values = transitions.Where(x => x.Key == (firsthalf, symbol)).SelectMany(x => x.Value).Distinct().ToList();
+                    if (values.Count != 0)
+                    {
+                        foreach (var value in values)
+                        {
+                            valuesCompleted.Add(value);
+                        }
+                    }
+
+                    values = transitions.Where(x => x.Key == (secondhalf, symbol)).SelectMany(x => x.Value).Distinct().ToList();
+                    if (values.Count != 0)
+                    {
+                        foreach (var value in values)
+                        {
+                            valuesCompleted.Add(value);
+                        }
+                    }
+
+                }
+                else if (tr.Key.state.Count() == 2)
+                {
+                    values = transitions.Where(x => x.Key == (tr.Key.state, symbol)).SelectMany(x => x.Value).Distinct().ToList();
                     foreach (var item1 in values)
                     {
                         valuesCompleted.Add(item1);
 
+                    }
+
+                    if(values.Count == 0)
+                    {
+                        foreach (var state in tr.Key.state)
+                        {
+                            states.Add(state.ToString());
+                        }
+                        //Hay que buscar por cada estado, su destino
+                        foreach (var item in states)
+                        {
+                            values = transitions.Where(x => x.Key == (item, symbol)).SelectMany(x => x.Value).Distinct().ToList();
+                            foreach (var item1 in values)
+                            {
+                                valuesCompleted.Add(item1);
+
+                            }
+                        }
                     }
                 }
 
@@ -943,7 +982,7 @@ namespace Automaton
                     }
                 }
             }
-           
+
 
         }
 
@@ -1125,7 +1164,7 @@ namespace Automaton
 
         private void txtStates_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
             if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) &&
                 e.KeyChar != ' ' && e.KeyChar != ',' && e.KeyChar != '.' &&
                 e.KeyChar != '-')
